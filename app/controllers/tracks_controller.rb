@@ -6,6 +6,14 @@ class TracksController < ApplicationController
     uri = URI(url)
     response = Net::HTTP.get(uri)
     @tracks = JSON.parse(response)
+
+    #Sample RSpotify call
+    my_tracks = RSpotify::Track.find("3YuaBvuZqcwN3CEAyyoaei")
+
+    p "*"* 80
+    p my_tracks
+    p "*"* 80
+
   end
 
 end

@@ -14,3 +14,6 @@ module LyricallyChallenged
     # -- all .rb files in that directory are automatically loaded.
   end
 end
+
+#Authenticate Rspotify
+RSpotify.authenticate(ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_CLIENT_SECRET'])
