@@ -1,5 +1,9 @@
+<h1>LYRICALLY CHALLENGED!</h1>
 
-<%@tracks["data"].each do |track|%>
-  <%=track["title"] %> -
-  <%=track["artist_name"] %> <br>
-<%end%>
+<%= form_tag("/search", method: "get", remote: true) do %>
+  <%= label_tag(:word, "Search for:") %>
+  <%= text_field_tag(:word) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<div id = "show-area"></div>
