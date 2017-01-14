@@ -22,4 +22,4 @@
 /.env
 
 #Ignore Gemfile.lock
-/.gitignore
+/Gemfile.lock
