@@ -3,4 +3,7 @@ Rails.application.routes.draw do
   root 'tracks#index'
   resources :tracks, only: [:index, :search, :show ]
   get "/search", to: "tracks#search"
+
+
+  resources :demos, only: [:index]
 end
