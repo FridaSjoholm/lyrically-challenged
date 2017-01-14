@@ -1,7 +1,0 @@
-
-<%@tracks["data"].each do |track|%>
-  <%=track["title"] %> -
-  <%=track["artist_name"] %> <br>
-  <% @spotify_id = track["track_spotify_id"] %>
-  <iframe src="https://embed.spotify.com/?uri=spotify:track:<%= @spotify_id %>" width="300" height="380" frameborder="0" allowtransparency="true"></iframe><br />
-<%end%>
