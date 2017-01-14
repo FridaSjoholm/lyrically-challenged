@@ -20,3 +20,6 @@
 
 #Ignore dot env file
 /.env
+
+#Ignore Gemfile.lock
+/.gitignore

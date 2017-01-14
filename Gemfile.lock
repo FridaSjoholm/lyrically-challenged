@@ -56,6 +56,8 @@ GEM
       railties (>= 4.0, < 5.1)
     erubis (2.7.0)
     execjs (2.7.0)
+    faraday (0.11.0)
+      multipart-post (>= 1.2, < 3)
     ffi (1.9.16)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
@@ -81,6 +83,7 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.10.1)
     multi_json (1.12.1)
+    multipart-post (2.0.0)
     newrelic_rpm (3.17.2.327)
     nio4r (1.2.1)
     nokogiri (1.7.0.1)
@@ -162,6 +165,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.2)
   dotenv-rails
+  faraday
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
@@ -178,4 +182,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.13.6
+   1.13.7
