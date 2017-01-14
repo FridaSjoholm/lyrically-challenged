@@ -5,7 +5,10 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-#for parsing response from lololyrics API
+#wrapper for Spotify API
+gem 'rspotify'
+
+#for parsing JSON
 gem 'nokogiri'
 
 #NewRelic gem for data analytics
