@@ -1,9 +1,12 @@
 <h1>LYRICALLY CHALLENGED!</h1>
 
-<%= form_tag("/search", method: "get", remote: true) do %>
+<%= form_tag("/search", method: "get", class: "form-search", remote: true) do %>
   <%= label_tag(:word, "Search for:") %>
   <%= text_field_tag(:word) %>
   <%= submit_tag("Search") %>
 <% end %>
-
-<div id = "show-area"></div>
+<br>
+<br>
+<div id = "show-area">
+    <p class="f-pending-message" style="display:none;"> Doing stuff </p>
+</div>

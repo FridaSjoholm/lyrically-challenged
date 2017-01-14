@@ -13,9 +13,7 @@ class TracksController < ApplicationController
 
     respond_to do |format|
       if @tracks["data"].length > 0
-        format.html {render :show}
-        format.js {}
-        format.json {}
+        format.html {render :show, layout: false}
       else
         flash[:danger] = 'There was a problem'
         format.html { render :index }
