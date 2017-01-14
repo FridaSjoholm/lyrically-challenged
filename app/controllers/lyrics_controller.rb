@@ -1,4 +1,4 @@
-class DemosController < ApplicationController
+class LyricsController < ApplicationController
 
   def index
     #Sample call to lyricapi
