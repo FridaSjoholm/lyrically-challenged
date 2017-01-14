@@ -170,6 +170,7 @@ DEPENDENCIES
   jquery-rails
   listen (~> 3.0.5)
   newrelic_rpm
+  nokogiri
   pg (~> 0.18)
   puma (~> 3.0)
   rails (~> 5.0.1)
