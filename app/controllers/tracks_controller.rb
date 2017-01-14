@@ -20,5 +20,6 @@ class TracksController < ApplicationController
         format.json { }
       end
     end
+
   end
 end

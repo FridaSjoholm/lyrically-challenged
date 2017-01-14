@@ -1,7 +1,12 @@
 
 <%@tracks["data"].each do |track|%>
-  <%=track["title"] %> -
-  <%=track["artist_name"] %> <br>
+  <% @track = track["title"].split(" ").join("%20") %>
+  <% @track.delete("%20[Explicit%20Version]") %>
+  <% @artist  = track["artist_name"].split(" ").join("%20") %>
+  <%= track["title"] %> -
+  <%= track["artist_name"] %> <br>
   <% @spotify_id = track["track_spotify_id"] %>
   <iframe src="https://embed.spotify.com/?uri=spotify:track:<%= @spotify_id %>" width="300" height="380" frameborder="0" allowtransparency="true"></iframe><br />
+  <% @lyrics = JSON.parse(Net::HTTP.get(URI("https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?format=json&callback=callback&q_track=#{@track}&q_artist=#{@artist}&apikey=" + ENV['MUSIXMATCH_API_KEY'])))%>
+  <%= @lyrics["message"]["body"]["lyrics"]["lyrics_body"] %>
 <%end%>
