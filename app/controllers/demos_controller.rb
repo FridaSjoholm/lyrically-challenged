@@ -6,8 +6,8 @@ class DemosController < ApplicationController
 
 
    #Check RSpotify is making a successful call
-        track = RSpotify::Track.find("6NPVjNh8Jhru9xOmyQigds")
-        p "track is found" if track != nil
+        # track = RSpotify::Track.find("6NPVjNh8Jhru9xOmyQigds")
+        # p "track is found" if track != nil
 
 
 
@@ -18,10 +18,10 @@ class DemosController < ApplicationController
     # p track.audio-features
 
    #Attempt 1: Try with Track.search
-   track = RSpotify::Track.search(track.name).first
-   p track
-   track.audio-features
-   track.audio_features
+  #  track = RSpotify::Track.search(track.name).first
+  #  p track
+  #  track.audio-features
+  #  track.audio_features
 
    #Attempt 2: Try with RSpotify::AudioFeatures.find
   #  p audio-features = RSpotify::AudioFeatures.find('6NPVjNh8Jhru9xOmyQigds')
