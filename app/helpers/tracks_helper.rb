@@ -22,8 +22,8 @@ module TracksHelper
       @release_year = attributes["release_year"]
       @track_spotify_id = attributes["track_spotify_id"]
       @popularity = attributes["popularity"]
-      @title = attributes["title"]
-      @artist_name = attributes["artist_name"]
+      @title = ActiveSupport::Inflector.transliterate(attributes["title"])
+      @artist_name = ActiveSupport::Inflector.transliterate(attributes["artist_name"])
       @duration = attributes["duration"]
     end
 
@@ -48,7 +48,8 @@ module TracksHelper
 
     def format_for_musixmatch
       self.title.split(" ").join("%20")
-      self.title.delete("%20[Explicit%20Version]", "")
+      self.title.delete("%20[Explicit%20Version]")
+      self.title.delete("#%20[Explicit%20Version]")
       self.artist_name.split(" ").join("%20")
     end
 
@@ -64,4 +65,3 @@ module TracksHelper
 
   end
 end
-
