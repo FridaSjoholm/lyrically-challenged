@@ -9,4 +9,8 @@
   <iframe src="https://embed.spotify.com/?uri=spotify:track:<%= @spotify_id %>" width="300" height="380" frameborder="0" allowtransparency="true"></iframe><br />
   <% @lyrics = JSON.parse(Net::HTTP.get(URI("https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?format=json&callback=callback&q_track=#{@track}&q_artist=#{@artist}&apikey=" + ENV['MUSIXMATCH_API_KEY'])))%>
   <%= @lyrics["message"]["body"]["lyrics"]["lyrics_body"] %>
+  <% @artist  = track["artist_name"].split(" ").join("_") %>
+  <% @track = track["title"].split(" ").join("_") %>
+  <% @track.delete("_[Explicit_Version]") %>
+  <%= link_to "Full Lyrics", "http://lyrics.wikia.com/wiki/#{@artist}:#{@track}", :target => "_blank" %>
 <%end%>
