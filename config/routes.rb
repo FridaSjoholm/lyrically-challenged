@@ -6,6 +6,4 @@ Rails.application.routes.draw do
 
 
   resources :lyrics, only: [:index]
-
-  resources :demos, only: [:index]
 end
