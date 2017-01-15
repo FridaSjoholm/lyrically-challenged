@@ -10,7 +10,8 @@ gem 'rspotify'
 
 #for parsing JSON
 gem 'nokogiri'
-
+gem 'pry-byebug'
+gem 'byebug'
 #NewRelic gem for data analytics
 gem 'newrelic_rpm'
 
