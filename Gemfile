@@ -7,6 +7,7 @@ end
 
 #for parsing response from lololyrics API
 gem 'nokogiri'
+gem "rspotify", github: 'SalasC2/rspotify', branch: 'master'
 
 #NewRelic gem for data analytics
 gem 'newrelic_rpm'
