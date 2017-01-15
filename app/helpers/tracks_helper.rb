@@ -1,4 +1,13 @@
-module MusicGraph
+module TracksHelper
+
+  #format track name for musicgraph api
+  #format artist name for musicgraph api
+  #spotify id
+
+  #format track name for musixmatch api
+
+
+
   #Set up API Key:
   # (1) Include dotenv gem in your gem file (look at https://github.com/bkeepers/dotenv for instructions)
     # (1.a) Make ".env" file in the root of your project
@@ -47,5 +56,12 @@ module MusicGraph
       tracks.map { |attributes| new(attributes) }
     end
 
+    def format_for_musixmatch
+      self.title.split(" ").join("%20")
+      self.title.delete("%20[Explicit%20Version]", "")
+      self.artist_name.split(" ").join("%20")
+    end
+
   end
 end
+
