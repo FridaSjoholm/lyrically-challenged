@@ -1,14 +1,11 @@
 
 <%@tracks.each do |track|%>
-  <% track.format_for_musixmatch %>
   <%= track.title %> -
   <%= track.artist_name %> <br>
   <% @spotify_id = track.track_spotify_id %>
   <iframe src="https://embed.spotify.com/?uri=spotify:track:<%= @spotify_id %>" width="300" height="380" frameborder="0" allowtransparency="true"></iframe><br />
-  <% @lyrics = JSON.parse(Net::HTTP.get(URI("https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?format=json&callback=callback&q_track=#{track.title}&q_artist=#{track.artist_name}&apikey=" + ENV['MUSIXMATCH_API_KEY'])))%>
-  <%= @lyrics["message"]["body"]["lyrics"]["lyrics_body"] %>
-  <% @artist  = track.artist_name.split(" ").join("_") %>
-  <% @track = track.title.split(" ").join("_") %>
-  <% @track.delete("_[Explicit_Version]") %>
-  <%= link_to "Full Lyrics", "http://lyrics.wikia.com/wiki/#{@artist}:#{@track}", :target => "_blank" %>
+  <% track.format_for_musixmatch %>
+  <%= track.lyrics["message"]["body"]["lyrics"]["lyrics_body"] %>
+  <% track.format_for_lyrics_wikia %><br />
+  <%= link_to "Full Lyrics", "http://lyrics.wikia.com/wiki/#{track.artist_name}:#{track.title}", :target => "_blank" %><br />
 <%end%>
