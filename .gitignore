@@ -20,6 +20,3 @@
 
 #Ignore dot env file
 /.env
-
-#Ignore Gemfile.lock
-/Gemfile.lock
