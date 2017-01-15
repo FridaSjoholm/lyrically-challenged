@@ -5,5 +5,7 @@ Rails.application.routes.draw do
   get "/search", to: "tracks#search"
 
 
+  resources :lyrics, only: [:index]
+
   resources :demos, only: [:index]
 end

@@ -5,20 +5,18 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-#wrapper for Spotify API
+#ADDED GEMS
+#wrapper for accessing Spotify API
 gem 'rspotify'
-
-#for parsing JSON
-gem 'nokogiri'
-gem 'pry-byebug'
-gem 'byebug'
 #NewRelic gem for data analytics
 gem 'newrelic_rpm'
-
 # Faraday for parsing JSON
 gem 'faraday'
 #dotenv for safely storing API keys
 gem 'dotenv-rails', :groups => [:development, :test]
+
+
+#DEFAULT GEMS
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.1'
 # Use postgresql as the database for Active Record
@@ -51,6 +49,7 @@ gem 'jbuilder', '~> 2.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'pry-byebug'
 end
 
 group :development do
