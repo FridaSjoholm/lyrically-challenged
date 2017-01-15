@@ -47,10 +47,11 @@ module TracksHelper
     end
 
     def format_for_musixmatch
-      self.title.split(" ").join("%20")
-      self.title.delete("%20[Explicit%20Version]")
-      self.title.delete("#%20[Explicit%20Version]")
-      self.artist_name.split(" ").join("%20")
+      title_arr = @title.split(" ")
+      @title = title_arr.join("%20")
+      @title = @title.delete("#")
+      artist_arr = @artist_name.split(" ")
+      @artist_name = artist_arr.join("%20")
     end
 
     def lyrics
@@ -58,9 +59,13 @@ module TracksHelper
     end
 
     def format_for_lyrics_wikia
-      self.artist_name.split(" ").join("_")
-      self.title.split(" ").join("_")
-      self.title.delete("_[Explicit_Version]")
+      p @title
+      @title = @title.chomp("%20[Explicit%20Version]")
+      p @title
+      artist_arr = @artist_name.split("%20")
+      @artist_name = artist_arr.join("_")
+      title_arr = @title.split("%20")
+      @title = title_arr.join("_")
     end
 
   end
