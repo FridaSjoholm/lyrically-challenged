@@ -54,16 +54,28 @@ module TracksHelper
       @artist_name = artist_arr.join("%20")
     end
 
+    # def lyricfy_track
+    #   fetcher = Lyricfy::Fetcher.new
+    #   song = fetcher.search @artist_name, @title
+    #   puts song.body("<br>") # prints lyrics separated by '\n'
+    # end
+
     def lyrics
-      JSON.parse(Net::HTTP.get(URI("https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?format=json&callback=callback&q_track=#{self.title}&q_artist=#{self.artist_name}&apikey=" + ENV['MUSIXMATCH_API_KEY'])))
+      p self
+      fetcher = Lyricfy::Fetcher.new
+      song = fetcher.search @artist_name, @title
+      p song.body("<br>")
+      # JSON.parse(Net::HTTP.get(URI("https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?format=json&callback=callback&q_track=#{self.title}&q_artist=#{self.artist_name}&apikey=" + ENV['MUSIXMATCH_API_KEY'])))
     end
 
     def format_for_lyrics_wikia
-      @title = @title.chomp("%20[Explicit%20Version]")
-      artist_arr = @artist_name.split("%20")
-      @artist_name = artist_arr.join("_")
-      title_arr = @title.split("%20")
-      @title = title_arr.join("_")
+      @title = @title.chomp("_[Explicit_Version]")
+      @title = @title.chomp("_[Acoustic]")
+
+      # artist_arr = @artist_name.split("%20")
+      # @artist_name = artist_arr.join("_")
+      # title_arr = @title.split("%20")
+      # @title = title_arr.join("_")
     end
 
   end
