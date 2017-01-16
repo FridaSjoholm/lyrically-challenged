@@ -39,8 +39,9 @@ module TracksHelper
     end
 
     def self.lyrics_keywords(params)
+      sanitized_string = params.gsub("'","")
       if params.is_a? String
-        response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&lyrics_keywords=#{params}")
+        response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&lyrics_keywords=#{sanitized_string}")
       end
       tracks = JSON.parse(response.body)["data"]
       tracks.map { |attributes| new(attributes) }
@@ -59,9 +60,7 @@ module TracksHelper
     end
 
     def format_for_lyrics_wikia
-      p @title
       @title = @title.chomp("%20[Explicit%20Version]")
-      p @title
       artist_arr = @artist_name.split("%20")
       @artist_name = artist_arr.join("_")
       title_arr = @title.split("%20")
