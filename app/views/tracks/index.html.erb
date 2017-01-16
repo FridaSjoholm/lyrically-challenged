@@ -10,8 +10,7 @@
             <div class="col-sm-7">
               <%= form_tag("/search", method: "get", class: "form-search", remote: true) do %>
                 <h1>Looking for a song about
-                <%= text_field_tag(:word) %></h1>
-                <p><%= submit_tag("Search") %></p>
+                <%= text_field_tag(:word) %></h1><%= submit_tag("Search", class:"btn btn-send") %>
               <% end %>
               <div class="portfolio-wrapper" >
                 <div class="col-md-12">
@@ -72,11 +71,8 @@
     <div class="row">
       <!-- SOCIAL ICONS -->
       <div class="col-sm-6 col-sm-push-6 footer-social-icons">
-        <span>Follow us:</span>
-        <a href=""><i class="fa fa-facebook"></i></a>
-        <a href=""><i class="fa fa-twitter"></i></a>
-        <a href=""><i class="fa fa-google-plus"></i></a>
-        <a href=""><i class="fa fa-pinterest-p"></i></a>
+        <span>Find us on:</span>
+        <a href="https://github.com/FridaSjoholm/lyrically-challenged" target="_blank"><i class="fa fa-github"></i></a>
       </div>
       <!-- /SOCIAL ICONS -->
       <div class="col-sm-6 col-sm-pull-6 copyright">
