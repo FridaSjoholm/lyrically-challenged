@@ -18,6 +18,7 @@ gem 'faraday'
 gem 'dotenv-rails', :groups => [:development, :test]
 # for analyzing sentiment of the query word
 gem 'sentimental'
+
 #wrapper for getting lyrics from LyricWikia or MetroMix
 gem 'lyricfy'
 
