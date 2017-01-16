@@ -6,6 +6,8 @@ git_source(:github) do |repo_name|
 end
 
 #ADDED GEMS
+#Gem for christian's computer because it breaks without it
+gem 'rb-readline'
 #wrapper for accessing Spotify API
 gem 'rspotify'
 #NewRelic gem for data analytics
