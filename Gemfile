@@ -17,6 +17,8 @@ gem 'dotenv-rails', :groups => [:development, :test]
 
 gem 'sentimental'
 
+gem 'lyricfy'
+
 
 
 #DEFAULT GEMS
