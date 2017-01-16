@@ -1,12 +1,47 @@
 <h1>LYRICALLY CHALLENGED!</h1>
+<!-- SLIDER -->
+<section id="slider">
+  <div id="home-carousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="item active" style="background-image:(/images/slider/01.jpg)">
+        <div class="carousel-caption container">
+          <div class="row">
+            <div class="col-sm-7">
+              <%= form_tag("/search", method: "get", class: "form-search", remote: true) do %>
+                <h1>Looking for a song about 
+                <%= text_field_tag(:word) %></h1>
+                <p><%= submit_tag("Search") %></p>
+              <% end %>
+              <p class="f-pending-message" style="display:none;"> Doing stuff </p>
 
-<%= form_tag("/search", method: "get", class: "form-search", remote: true) do %>
-  <%= label_tag(:word, "Search for:") %>
-  <%= text_field_tag(:word) %>
-  <%= submit_tag("Search") %>
-<% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item" style="background-image:(/images/slider/02.jpg)">
+        <div class="carousel-caption container">
+          <div class="row">
+            <div class="col-sm-7">
+              <h1>Find</h1>
+              <h2>Awesome songs</h2>
+              <p>Based on what you actually want</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="home-carousel-left" href="#home-carousel" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+      <a class="home-carousel-right" href="#home-carousel" data-slide="next"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div> <!--/#home-carousel-->
+  </section>
+<!-- /SLIDER -->
+
 <br>
 <br>
-<p class="f-pending-message" style="display:none;"> Doing stuff </p>
 <div id = "show-area">
+<img
+  class="f-pending-message"
+  style="width:80px;height:60px;display:none;"
+  src="http://www.downgraf.com/wp-content/uploads/2014/09/01-progress.gif"
+/>
 </div>
