@@ -8,12 +8,16 @@
           <div class="row">
             <div class="col-sm-7">
               <%= form_tag("/search", method: "get", class: "form-search", remote: true) do %>
-                <h1>Looking for a song about 
+                <h1>Looking for a song about
                 <%= text_field_tag(:word) %></h1>
                 <p><%= submit_tag("Search") %></p>
               <% end %>
               <p class="f-pending-message" style="display:none;"> Doing stuff </p>
-
+              <img
+                class="f-pending-message"
+                style="width:500px;height:180px;display:none;"
+                src="https://userscontent2.emaze.com/images/c99e58c5-cc05-4af4-ab93-4614a40e077b/386d9c23-88e2-487a-b84f-47bba61bb4a6.gif"
+              />
             </div>
           </div>
         </div>
@@ -39,9 +43,4 @@
 <br>
 <br>
 <div id = "show-area">
-<img
-  class="f-pending-message"
-  style="width:80px;height:60px;display:none;"
-  src="http://www.downgraf.com/wp-content/uploads/2014/09/01-progress.gif"
-/>
 </div>
