@@ -7,8 +7,8 @@
 
 <%@tracks.each do |track|%>
   <div class="col-md-4 col-sm-6 st-service">
-    <h2 class="track-title">"<%= track.title %>"</h2>
-    <h2></h2><%= track.artist_name %> <br></h2>
+    <h3 class="track-title"><%= track.title %></h3>
+    <h2><%= track.artist_name %> <br></h2>
     <% @spotify_id = track.track_spotify_id %>
     <iframe src="https://embed.spotify.com/?uri=spotify:track:<%= @spotify_id %>" width="300" height="380" frameborder="0" allowtransparency="true"></iframe><br />
     <% track.format_for_lyrics_wikia %>
