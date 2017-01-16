@@ -13,4 +13,16 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
+//= require request_handlers
+//= require bootstrap.min
+//= require cable
+//= require jquery.counterup.min
+//= require jquery.fitvids
+//= require jquery.isotope.min
+//= require jquery.magnific-popup.min
+//= require jquery.parallax
+//= require masonry.pkgd.min
+//= require owl.carousel.min
+//= require scripts
+//= require smoothscroll
+//= require waypoints.min
