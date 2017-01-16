@@ -10,9 +10,13 @@ $(function() {
 // when API calls successfully return data of filtered songs to show
   // hide the loading... message
   $(".form-search").on("ajax:success", function(e, data, status, xhr) {
+    var $display = $('#show-area')
     $('.f-pending-message').hide();
-    $('#show-area').show();
-    $('#show-area').html(data);
+    $display.show();
+    $display.html(data);
+    $('html, body').animate({
+        scrollTop: $("#show-area").offset().top
+    }, 'slow');
   });
 
   $(".feelings-search").on("ajax:success", function(e, data, status, xhr) {
