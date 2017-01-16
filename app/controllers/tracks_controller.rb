@@ -9,8 +9,14 @@ class TracksController < ApplicationController
   def search
 
     @tracks = TracksHelper::Track.lyrics_keywords(params[:word])
-    p "HITTING tracks#search"
-    p @tracks.first
+    analyzer = Sentimental.new
+    # Load the default sentiment dictionaries
+    analyzer.load_defaults
+
+    # Set a global threshold
+    analyzer.threshold = 1
+    @valence = analyzer.score(params[:word])
+
     # @word = params[:word]
     # url = "http://api.musicgraph.com/api/v2/track/search?api_key=" + ENV['MUSIC_GRAPH_API_KEY'] + "&lyrics_phrase=" + @word
     # uri = URI(url)
