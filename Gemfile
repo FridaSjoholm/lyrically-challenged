@@ -14,7 +14,7 @@ gem 'newrelic_rpm'
 gem 'faraday'
 #dotenv for safely storing API keys
 gem 'dotenv-rails', :groups => [:development, :test]
-
+# for analyzing sentiment of the query word
 gem 'sentimental'
 
 

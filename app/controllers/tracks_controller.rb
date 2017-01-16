@@ -3,7 +3,8 @@ class TracksController < ApplicationController
   include TracksHelper
 
   def index
-
+    #Instead of an array of hashes, maybe there should be a madlib object?
+    @questions = [{"I want a ": ["love", "breakup"]}, {"song about ": ["someone, a girl, a boy"]}, {"named ": ["Christian", "Frida", "Katie", "Jin"]}]
   end
 
   def search
