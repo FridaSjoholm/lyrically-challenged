@@ -69,8 +69,14 @@ module TracksHelper
     end
 
     def format_for_lyrics_wikia
+      title_arr = @title.split(" ")
+      @title = title_arr.join("_")
+      @title = @title.delete("#!")
       @title = @title.chomp("_[Explicit_Version]")
       @title = @title.chomp("_[Acoustic]")
+      artist_arr = @artist_name.split(" ")
+      @artist_name = artist_arr.join("_")
+      p @title
 
       # artist_arr = @artist_name.split("%20")
       # @artist_name = artist_arr.join("_")
