@@ -32,9 +32,9 @@ class DemosController < ApplicationController
     analyzer.load_defaults
 
     # Set a global threshold
-    analyzer.threshold = 1
+    analyzer.threshold = 0.1
     @valence = analyzer.score(params[:word])
-
+    p @valence
     respond_to do |format|
       if @tracks.length > 0
         @songs = []
