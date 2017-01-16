@@ -47,24 +47,30 @@ module TracksHelper
       tracks.map { |attributes| new(attributes) }
     end
 
-    def format_for_musixmatch
-      title_arr = @title.split(" ")
-      @title = title_arr.join("%20")
-      @title = @title.delete("#")
-      artist_arr = @artist_name.split(" ")
-      @artist_name = artist_arr.join("%20")
-    end
 
     def lyrics
-      JSON.parse(Net::HTTP.get(URI("https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?format=json&callback=callback&q_track=#{self.title}&q_artist=#{self.artist_name}&apikey=" + ENV['MUSIXMATCH_API_KEY'])))
+      fetcher = Lyricfy::Fetcher.new
+      begin
+        if fetcher.search @artist_name, @title
+          song = fetcher.search @artist_name, @title
+          song.body("<br>")
+        else
+          return "Lyric not found"
+        end
+      rescue NoMethodError => e
+        return "Lyric not found"
+      end
     end
 
     def format_for_lyrics_wikia
-      @title = @title.chomp("%20[Explicit%20Version]")
-      artist_arr = @artist_name.split("%20")
-      @artist_name = artist_arr.join("_")
-      title_arr = @title.split("%20")
+      title_arr = @title.split(" ")
       @title = title_arr.join("_")
+      @title = @title.delete("#")
+      @title = @title.gsub(/_?\[(.*?)\]/, "")
+      artist_arr = @artist_name.split(" ")
+      artist_arr.map(&:capitalize!)
+      @artist_name = artist_arr.join("_")
+      @artist_name = URI.escape(@artist_name, /[?#]/)
     end
 
   end
