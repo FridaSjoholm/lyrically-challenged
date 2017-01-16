@@ -6,6 +6,8 @@ git_source(:github) do |repo_name|
 end
 
 #ADDED GEMS
+#Gem for christian's computer because it breaks without it
+gem 'rb-readline'
 #wrapper for accessing Spotify API
 gem 'rspotify'
 #NewRelic gem for data analytics
@@ -14,9 +16,10 @@ gem 'newrelic_rpm'
 gem 'faraday'
 #dotenv for safely storing API keys
 gem 'dotenv-rails', :groups => [:development, :test]
-
+# for analyzing sentiment of the query word
 gem 'sentimental'
-gem 'rb-readline'
+
+#wrapper for getting lyrics from LyricWikia or MetroMix
 gem 'lyricfy'
 
 
