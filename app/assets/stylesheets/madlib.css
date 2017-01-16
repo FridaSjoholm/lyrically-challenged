@@ -1,0 +1,44 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,200,600);
+
+/*body {
+	background-color: #FAF2D6;
+	font-family: Raleway;
+	font-weight: 200;
+	color: #EC5A45;
+	font-size: 48px;
+}*/
+
+.form {
+  font-weight: 200;
+  font-size: 48px;
+	min-height: 100%;
+  	display: flex;
+  	align-items: center;
+}
+
+.dotted-btn {
+	background-color: transparent;
+	font-size: 48px;
+	font-weight: 200;
+	border-bottom: dotted 3px #C9CCC8;
+	padding: 10px 3px;
+	transition: all 500ms ease-out;
+}
+
+.dotted-btn:hover {
+	color: #4D4571;
+	border-bottom: dotted 3px #4D4571;
+}
+
+/* still have flickering issues */
+.btn-group.open .dropdown-toggle {
+	box-shadow: none;
+}
+
+.dropdown-menu, .dropdown-menu li a {
+	background-color: #4D4571;
+	color: #FAF2D6;
+	font-size: 28px;
+}
+
+/*Thanks to https://codepen.io/JonLehman/pen/zBpzoK*/
