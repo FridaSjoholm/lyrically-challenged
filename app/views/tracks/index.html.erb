@@ -1,8 +1,8 @@
 
 <!-- SLIDER -->
 <section id="slider">
-  <div id="home-carousel" class="carousel">
-    <div id="lc_carousel" class="carousel-inner">
+  <div id="home-carousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
 
       <div class="item active" style="background-image:(/images/slider/01.jpg)">
         <div class="carousel-caption container">
@@ -26,24 +26,19 @@
         <div class="carousel-caption container">
           <div class="row">
             <div class="col-sm-7">
-              <h1>Find</h1>
-              <h2>Awesome songs</h2>
-              <p>Based on what you actually want</p>
+
+              <%= render "tracks/carousel/03madlib" %>
+
             </div>
           </div>
         </div>
       </div>
 
-
-      <%= render "tracks/carousel/01intro" %>
-      <!-- TD: In future, iterate through madlibs -->
-      <%= render "tracks/carousel/03madlib" %>
-
       <a class="home-carousel-left" href="#home-carousel" data-slide="prev"><i class="fa fa-angle-left"></i></a>
       <a class="home-carousel-right" href="#home-carousel" data-slide="next"><i class="fa fa-angle-right"></i></a>
     </div> <!-- /.carousel-inner -->
   </div> <!--/#home-carousel-->
-</section>
+  </section>
 <!-- /SLIDER -->
 
 <!--RESULTS-->
