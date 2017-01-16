@@ -17,12 +17,10 @@ $(function() {
     $('#show-area').show();
     $('#show-area').html(data);
   });
-
-
-
+  
 });
 
-// to show dropdown selection for madlib forms in the carousel 
+// to show dropdown selection for madlib forms in the carousel
 $(".dropdown-menu li a").click(function(){
   var selText = $(this).text();
   $(this).parents('.btn-group').find('.dropdown-toggle').html(selText);
