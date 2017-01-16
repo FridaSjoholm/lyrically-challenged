@@ -16,7 +16,7 @@ gem 'faraday'
 gem 'dotenv-rails', :groups => [:development, :test]
 
 gem 'sentimental'
-
+gem 'rb-readline'
 gem 'lyricfy'
 
 

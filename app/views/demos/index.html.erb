@@ -1,20 +1,14 @@
-<h1> Song: <%= @track.name %> </h1>
+<%= form_tag("/searchstuff", method: "get", class: "feelings-search", remote: true) do %>
+  <h1>Looking for a song about
+  <%= text_field_tag(:word) %>
+  <p><%= submit_tag("Search") %>
+<% end %>
 
-valence: <%=@valence%>
-<br>
-danceability: <%=@danceability%>
-<br>
-duration: <%=@duration_ms%>
-<br>
-energy: <%=@energy%>
-<br>
-instrumentalness: <%=@instrumentalness%>
-<br>
-liveness: <%=@liveness%>
-<br>
-speechiness: <%=@speechiness%>
-<br>
-tempo: <%=@tempo%>
-<br>
-time signature: <%=@time_signature%>
-<br>
+<img
+  class="f-pending-message"
+  style="width:500px;height:180px;display:none;"
+  src="https://userscontent2.emaze.com/images/c99e58c5-cc05-4af4-ab93-4614a40e077b/386d9c23-88e2-487a-b84f-47bba61bb4a6.gif"
+/>
+
+<div id = "show-songs">
+</div>
