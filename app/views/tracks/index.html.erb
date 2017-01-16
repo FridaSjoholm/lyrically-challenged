@@ -1,12 +1,54 @@
 <h1>LYRICALLY CHALLENGED!</h1>
-
+<!-- SLIDER -->
 <%= form_tag("/search", method: "get", class: "form-search", remote: true) do %>
   <%= label_tag(:word, "Search for:") %>
   <%= text_field_tag(:word) %>
   <%= submit_tag("Search") %>
 <% end %>
-<br>
-<br>
 <p class="f-pending-message" style="display:none;"> Doing stuff </p>
+
+<section id="slider">
+  <div id="home-carousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="item active" style="background-image:(/images/slider/01.jpg)">
+        <div class="carousel-caption container">
+          <div class="row">
+            <div class="col-sm-7">
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item" style="background-image:(/images/slider/02.jpg)">
+        <div class="carousel-caption container">
+          <div class="row">
+            <div class="col-sm-7">
+              <h1>Find</h1>
+              <h2>Awesome songs</h2>
+              <p>Based on what you actually want</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item" style="background-image:(/images/slider/04.jpg)">
+        <div class="carousel-caption container">
+          <div class="row">
+            <div class="col-sm-7">
+              <h1>You are entire </h1>
+              <h2>creative world</h2>
+              <p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor. Aenean sollicitudin, lorem quis bibendum auctor.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="home-carousel-left" href="#home-carousel" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+      <a class="home-carousel-right" href="#home-carousel" data-slide="next"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div> <!--/#home-carousel-->
+  </section>
+<!-- /SLIDER -->
+
+<br>
+<br>
 <div id = "show-area">
 </div>
