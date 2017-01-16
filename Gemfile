@@ -21,6 +21,8 @@ gem 'sentimental'
 
 #wrapper for getting lyrics from LyricWikia or MetroMix
 gem 'lyricfy'
+gem 'google-cloud-language'
+gem 'googleauth'
 
 
 
