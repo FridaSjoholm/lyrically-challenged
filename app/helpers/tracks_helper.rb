@@ -53,7 +53,8 @@ module TracksHelper
       begin
         if fetcher.search @artist_name, @title
           song = fetcher.search @artist_name, @title
-          song.body("<br>")
+          song.body("\n")
+
         else
           return "Lyric not found"
         end
