@@ -15,6 +15,8 @@ gem 'faraday'
 #dotenv for safely storing API keys
 gem 'dotenv-rails', :groups => [:development, :test]
 
+gem 'sentimental'
+
 
 
 #DEFAULT GEMS
