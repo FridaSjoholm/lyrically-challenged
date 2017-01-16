@@ -39,8 +39,9 @@ module TracksHelper
     end
 
     def self.lyrics_keywords(params)
+      sanitized_string = params.gsub("'","")
       if params.is_a? String
-        response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&lyrics_keywords=#{params}")
+        response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&lyrics_keywords=#{sanitized_string}")
       end
       tracks = JSON.parse(response.body)["data"]
       tracks.map { |attributes| new(attributes) }
