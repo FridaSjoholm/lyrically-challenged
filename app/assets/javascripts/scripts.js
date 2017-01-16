@@ -168,7 +168,7 @@
 	// 	lazyLoad : true,
 	// 	pagination:false,
 	// 	navigation : false,
-	// 	autoPlay: true,
+	// 	autoPlay: false,
 	// 	});
   //
 	// }());
