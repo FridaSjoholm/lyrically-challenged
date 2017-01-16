@@ -9,8 +9,14 @@ class TracksController < ApplicationController
   def search
 
     @tracks = TracksHelper::Track.lyrics_keywords(params[:word])
-    analyzer = Sentimental.new(threshold: 0.5)
-    @valence = analyzer.score
+    analyzer = Sentimental.new
+    # Load the default sentiment dictionaries
+    analyzer.load_defaults
+
+    # Set a global threshold
+    analyzer.threshold = 1
+
+    @valence = analyzer.score(params[:word])
     p params[:word]
     p @valence
     # @word = params[:word]
