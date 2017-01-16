@@ -13,6 +13,17 @@
                 <%= text_field_tag(:word) %></h1>
                 <p><%= submit_tag("Search") %></p>
               <% end %>
+              <div class="portfolio-wrapper" >
+                <div class="col-md-12">
+                  <ul class="filter">
+                    <li>Input forms:</li>
+                    <li><a class="active" href="#" data-filter="*">Simple</a></li>
+                    <li><a href="#" data-filter="*">Sentiment</a></li>
+                    <li><a href="#" data-filter=".wordpress">Party</a></li>
+
+                  </ul><!--/#portfolio-filter-->
+                </div>
+              </div>
               <img
                 class="f-pending-message"
                 style="width:500px;height:180px;display:none;"
@@ -36,6 +47,9 @@
 
       <a class="home-carousel-left" href="#home-carousel" data-slide="prev"><i class="fa fa-angle-left"></i></a>
       <a class="home-carousel-right" href="#home-carousel" data-slide="next"><i class="fa fa-angle-right"></i></a>
+
+
+
     </div> <!-- /.carousel-inner -->
   </div> <!--/#home-carousel-->
   </section>
