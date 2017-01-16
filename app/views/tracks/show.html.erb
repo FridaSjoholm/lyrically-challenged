@@ -5,7 +5,7 @@
   <% @spotify_id = track.track_spotify_id %>
   <iframe src="https://embed.spotify.com/?uri=spotify:track:<%= @spotify_id %>" width="300" height="380" frameborder="0" allowtransparency="true"></iframe><br />
   <% track.format_for_musixmatch %>
-  <%= track.lyrics["message"]["body"]["lyrics"]["lyrics_body"] %>
+  <%= track.lyrics.dig("message","body","lyrics","lyrics_body") if track.lyrics.dig("message", "header","status_code") != 404 %>
   <% track.format_for_lyrics_wikia %><br />
   <%= link_to "Full Lyrics", "http://lyrics.wikia.com/wiki/#{track.artist_name}:#{track.title}", :target => "_blank" %><br />
 <%end%>
