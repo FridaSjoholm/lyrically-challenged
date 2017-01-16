@@ -35,27 +35,27 @@ class DemosController < ApplicationController
     # analyzer.threshold = 0.1
     # @valence = analyzer.score(params[:word])
 
-    require 'net/http'
-
-    uri = URI('https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/languages')
-    uri.query = URI.encode_www_form({
-        # Request parameters
-        'numberOfLanguagesToDetect' => 1
-    })
-
-    request = Net::HTTP::Post.new(uri.request_uri)
-    # Request headers
-    request['Content-Type'] = 'application/json'
-    # Request headers
-    request['Ocp-Apim-Subscription-Key'] = ENV['MICROSOFT_API_KEY']
-    # Request body
-    request.body = params[:word]
-
-    response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
-        http.request(request)
-    end
-
-    puts response.body
+    # require 'net/http'
+    #
+    # uri = URI('https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/languages')
+    # uri.query = URI.encode_www_form({
+    #     # Request parameters
+    #     'numberOfLanguagesToDetect' => 1
+    # })
+    #
+    # request = Net::HTTP::Post.new(uri.request_uri)
+    # # Request headers
+    # request['Content-Type'] = 'application/json'
+    # # Request headers
+    # request['Ocp-Apim-Subscription-Key'] = ENV['MICROSOFT_API_KEY']
+    # # Request body
+    # request.body = params[:word]
+    #
+    # response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
+    #     http.request(request)
+    # end
+    #
+    # puts response.body
 
 
 
