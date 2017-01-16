@@ -17,7 +17,7 @@ $(function() {
     $('#show-area').show();
     $('#show-area').html(data);
   });
-  
+
 });
 
 // to show dropdown selection for madlib forms in the carousel
