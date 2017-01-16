@@ -64,7 +64,7 @@ module TracksHelper
 
     def format_for_lyrics_wikia
       title_arr = @title.split(" ")
-      @title = title_arr.join("_")
+      @brantitle = title_arr.join("_")
       @title = @title.delete("#")
       @title = @title.gsub(/_?\[(.*?)\]/, "")
       artist_arr = @artist_name.split(" ")

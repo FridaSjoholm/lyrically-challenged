@@ -1093,3 +1093,15 @@ input {
 			color: #fff;
 			border: none;
 		}
+
+
+.song-result {
+	height: 200px;
+	overflow-y: hidden;
+}
+
+.track-title {
+	white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
