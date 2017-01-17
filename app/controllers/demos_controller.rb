@@ -75,24 +75,13 @@ class DemosController < ApplicationController
           if track.track_spotify_id != nil
             song = RSpotify::AudioFeatures.find(track.track_spotify_id)
 
-            # p "*" * 100
-            # p "SONG VALENCE"
-            # p song.valence
-            # p "SENTIMENT SCORE"
-            # p annotation.sentiment.score
-            # p "*" * 100
-
             if song.valence < 0.2 && annotation.sentiment.score < -(0.4)
-              p "This is depressing"
               @songs << track
             elsif (song.valence > 0.2 && song.valence < 0.4) && (annotation.sentiment.score < 0 && annotation.sentiment.score > -(0.4))
-              p "This is sort of depressing"
               @songs << track
             elsif (song.valence > 0.4 && song.valence < 0.6) && (annotation.sentiment.score < 0.5 && annotation.sentiment.score > 0)
-              p "This is somewhat happy"
               @songs << track
             elsif (song.valence > 0.6 && song.valence <= 1) && (annotation.sentiment.score > 0.5 && annotation.sentiment.score <= 1)
-              p "This is happy"
               @songs << track
             end
           else
