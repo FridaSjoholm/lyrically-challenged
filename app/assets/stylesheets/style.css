@@ -71,6 +71,12 @@
 		text-decoration: none;
 	}
 
+	#logo{
+		padding-top: 1%;
+		padding-left: 1%;
+
+	}
+
 	#st-preloader {
 		background: #FFF;
 		bottom: 0;
@@ -1096,8 +1102,10 @@ input {
 
 
 .song-result {
+	width: 298px;
 	height: 200px;
 	overflow-y: hidden;
+	text-align: justify;
 }
 
 .track-title {
