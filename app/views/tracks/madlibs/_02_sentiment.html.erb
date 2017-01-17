@@ -1,4 +1,4 @@
-<%= form_tag("sentiment/search", method: "get", class: "form-search", remote: true) do %>
+<%= form_tag("/search", method: "get", class: "form-search", remote: true) do %>
 
  <h1>Looking for a song about
   <%= text_field_tag(:word, "", placeholder:"(topic)") %>

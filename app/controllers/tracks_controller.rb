@@ -7,8 +7,8 @@ class TracksController < ApplicationController
     @questions = [["I want a song that makes me feel ", @sentiments, "emotion"], ["about", @names, "name"]]
   end
 
+#Search just by keyword(s)
   def search
-
     @tracks = TracksHelper::Track.lyrics_keywords(params[:word])
     respond_to do |format|
       if @tracks.length > 0
@@ -19,6 +19,22 @@ class TracksController < ApplicationController
         format.json { }
       end
     end
-
   end
+
+  #Search by keyword and sentiment
+  def search_with_sentiment
+    @form_feeling = params[:feeling]
+    @tracks = TracksHelper::Track.lyrics_keywords(params[:word]).select{ |t| t.match_sentiment(@form_feeling)}
+    respond_to do |format|
+      if @tracks.length > 0
+        format.html {render :show, layout: false}
+      else
+        flash[:danger] = 'There was a problem'
+        format.html { render :index }
+        format.json { }
+      end
+    end
+  end
+
+
 end
