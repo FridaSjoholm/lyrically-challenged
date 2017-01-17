@@ -46,7 +46,7 @@ class DemosController < ApplicationController
     # @tempo = audio_features.tempo
     # @time_signature = audio_features.time_signature
     # @key
-    # @mode  
+    # @mode
     #
 
     #See all audio_features here
