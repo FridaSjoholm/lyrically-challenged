@@ -20,6 +20,3 @@
 
 #Ignore dot env file
 /.env
-
-#Ignore Google api key
-/.My Project-0db65554158c.json
