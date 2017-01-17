@@ -31,67 +31,50 @@ module TracksHelper
     end
 
     #Initialize new tracks with attrs from API calls to (1)MusicGraph and (2)Spotify
-    def self.lyrics_keywords(params, limit=12)
+    def self.lyrics_keywords(params, limit=12) #self.get_tracks_by_keyword
       sanitized_string = params.gsub("'","")
       if params.is_a? String
         response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&limit=#{limit}&lyrics_keywords=#{sanitized_string}")
       end
       tracks = JSON.parse(response.body)["data"]
-      tracks.map { |attributes| new(attributes) }
+      clean_tracks = clean_and_prepare_track_data(tracks)
+      clean_tracks.map { |attributes| new(attributes) }
+      #set lyrics attribute for track
     end
+
+    #method to only display tracks that have valid spotify id's
+    def self.clean_and_prepare_track_data(tracks)
+      tracks.select { |track| track.key?("track_spotify_id") }
+    end
+
+    # def self.search(params)
+    #   if params.is_a? String
+    #     response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&title=#{params}")
+    #   elsif params.is_a? Hash
+    #     encoded_params = URI.encode_www_form(params)
+    #     response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&#{encoded_params}")
+    #   end
+    #   tracks = JSON.parse(response.body)["data"]
+    #   tracks.map { |attributes| new(attributes) }
+    # end
 
 #Filter by matching given feeling
-def self.match_sentiment(@feeling)
-    if @feeling == "sad"
+def match_sentiment(form_feeling)
+    if form_feeling == "sad"
       p "You want to be sad"
-      @sad_tracks = []
-      @stracks.each do |track|
-        if track.audio_features != nil
-          if track.audio_features.valence < 0.4
-
-            @sad_tracks << track
-          end
-        end
-      end
-      @feeling_tracks = @sad_tracks
-    elsif @feeling == "angry"
+      audio_features.valence < 0.4
+    elsif form_feeling == "angry"
       p "You want to be angry"
-      @angry_tracks = []
-      @stracks.each do |track|
-        if track.audio_features != nil
-          if track.audio_features.valence >= 0.4 && track.audio_features.valence <= 0.6
-
-            @angry_tracks << track
-          end
-        end
-      end
-      @feeling_tracks = @angry_tracks
-    elsif @feeling == "calm"
+      audio_features.valence >= 0.4 && audio_features.valence <= 0.6
+    elsif form_feeling == "calm"
       p "You want to be calm"
-      @calm_tracks = []
-      @stracks.each do |track|
-        if track.audio_features != nil
-          if track.audio_features.valence > 0.4 && track.audio_features.tempo < 100
-
-            @calm_tracks << track
-          end
-        end
-      end
-      @feeling_tracks = @calm_tracks
-    elsif @feeling == "happy"
+      audio_features.valence > 0.4 && audio_features.tempo < 100
+    elsif form_feeling == "happy"
       p "You want to be happy"
-      @happy_tracks = []
-      @stracks.each do |track|
-        if track.audio_features != nil
-          if track.audio_features.valence > 0.6
-
-            @happy_tracks << track
-          end
-        end
-      end
-      @feeling_tracks = @happy_tracks
-
+      audio_features.valence > 0.6
     end
+  end
+
 
 
     def lyrics

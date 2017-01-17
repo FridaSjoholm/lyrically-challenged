@@ -9,7 +9,7 @@ class SentimentController < ApplicationController
     #User choose feeling on form
     @form_feeling = params[:feeling]
     #Get tracks which match the sentiment of the form_feeling
-    @tracks = TracksHelper::Track.lyrics_keywords(params[:word], 20).filter{ |t| t.match_sentiment(@form_feeling)}
+    @tracks = TracksHelper::Track.lyrics_keywords(params[:word], 20).select{ |t| t.match_sentiment(@form_feeling)}
 
     respond_to do |format|
       if @tracks.length > 0
