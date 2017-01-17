@@ -27,6 +27,11 @@ module TracksHelper
       @duration = attributes["duration"]
     end
 
+    #method to only display tracks that have valid spotify id's
+    def self.clean_and_prepare_track_data(tracks)
+      tracks.select { |track| track.key?("track_spotify_id") }
+    end
+
     def self.search(params)
       if params.is_a? String
         response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&title=#{params}")
@@ -44,8 +49,10 @@ module TracksHelper
         response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&limit=12&lyrics_keywords=#{sanitized_string}")
       end
       tracks = JSON.parse(response.body)["data"]
-      tracks.map { |attributes| new(attributes) }
+      clean_tracks = clean_and_prepare_track_data(tracks)
+      clean_tracks.map { |attributes| new(attributes) }
     end
+
 
 
     def lyrics
