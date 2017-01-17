@@ -1102,8 +1102,10 @@ input {
 
 
 .song-result {
+	width: 298px;
 	height: 200px;
 	overflow-y: hidden;
+	text-align: justify;
 }
 
 .track-title {
