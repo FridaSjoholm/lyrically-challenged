@@ -1,8 +1,11 @@
-<div class="row"> <%= question.keys.first %>
+<div class="row">
+  <!-- Starting text of a question -->
+  <%= question[0] %>
+  <!-- Answer choices as a drop-down, with (placeholder) -->
   <div class="btn-group">
-    <a class="btn dropdown-toggle dotted-btn" data-toggle="dropdown" href="#">(topic)</span></a>
+    <a class="btn dropdown-toggle dotted-btn" data-toggle="dropdown" href="#">(<%= question[2] %>)</span></a>
     <ul class="dropdown-menu">
-      <% question.values.first.each do |answer| %>
+      <% question[1].each do |answer| %>
       <li><a href="#"><%= answer %> </a></li>
       <% end %>
     </ul>

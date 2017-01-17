@@ -10,16 +10,17 @@
             <div class="col-sm-7">
               <%= form_tag("/search", method: "get", class: "form-search", remote: true) do %>
                 <h1>Looking for a song about
-                <%= text_field_tag(:word) %></h1><%= submit_tag("Search", class:"btn btn-send") %>
+                <%= text_field_tag(:word) %></h1>
+                <%= submit_tag("Search", class:"btn btn-send") %>
               <% end %>
 
               <div class="portfolio-wrapper" >
                 <div class="col-md-12">
                   <ul class="filter">
                     <li>Input forms:</li>
-                    <li><a class="active">Simple</a></li>
+                    <li data-target="#home-carousel" data-slide-to="0"><a class="active">Simple</a></li>
                     <li data-target="#home-carousel" data-slide-to="1"><a>Sentiment</a></li>
-                    <li><a href="#" data-filter=".wordpress">Party</a></li>
+                    <li data-target="#home-carousel" data-slide-to="2" ><a>Party</a></li>
 
                   </ul><!--/#portfolio-filter-->
 
@@ -35,8 +36,41 @@
         </div>
       </div>
 
-      <a class="home-carousel-left" href="#home-carousel" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-      <a class="home-carousel-right" href="#home-carousel" data-slide="next"><i class="fa fa-angle-right"></i></a>
+      <div class="item">
+        <div class="carousel-caption container">
+          <div class="row">
+            <div class="col-sm-7">
+
+              <%= form_tag("/sentiment", method: "get", class: "form-search", remote: true) do %>
+                <h1>Looking for a song about
+                <%= text_field_tag(:word) %></h1>
+                <%= select_tag :feeling, "<option value='sad'>Sad</option>".html_safe %> <br />
+                <%= submit_tag("Search", class:"btn btn-send") %>
+              <% end %>
+              <div class="portfolio-wrapper" >
+                <div class="col-md-12">
+                  <ul class="filter">
+                    <li>Input forms:</li>
+                    <li data-target="#home-carousel" data-slide-to="0"><a>Simple</a></li>
+                    <li data-target="#home-carousel" data-slide-to="1"><a class="active">Sentiment</a></li>
+                    <li data-target="#home-carousel" data-slide-to="2" ><a>Party</a></li>
+
+                  </ul><!--/#portfolio-filter-->
+
+                </div>
+              </div>
+              <img
+                class="f-pending-message"
+                style="width:500px;height:180px;display:none;"
+                src="https://userscontent2.emaze.com/images/c99e58c5-cc05-4af4-ab93-4614a40e077b/386d9c23-88e2-487a-b84f-47bba61bb4a6.gif"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
 
       <div class="item">
         <div class="carousel-caption container">
@@ -44,6 +78,24 @@
             <div class="col-sm-7">
 
               <%= render "tracks/carousel/03madlib" %>
+
+              <div class="portfolio-wrapper" >
+                <div class="col-md-12">
+                  <ul class="filter">
+                    <li>Input forms:</li>
+                    <li data-target="#home-carousel" data-slide-to="0"><a>Simple</a></li>
+                    <li data-target="#home-carousel" data-slide-to="1"><a>Sentiment</a></li>
+                    <li data-target="#home-carousel" data-slide-to="2" class="active"><a>Party</a></li>
+
+                  </ul><!--/#portfolio-filter-->
+
+                </div>
+              </div>
+              <img
+                class="f-pending-message"
+                style="width:500px;height:180px;display:none;"
+                src="https://userscontent2.emaze.com/images/c99e58c5-cc05-4af4-ab93-4614a40e077b/386d9c23-88e2-487a-b84f-47bba61bb4a6.gif"
+              />
 
             </div>
           </div>

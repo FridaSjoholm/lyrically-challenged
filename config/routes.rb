@@ -9,4 +9,7 @@ Rails.application.routes.draw do
 
   resources :demos, only: [:index, :searchstuff, :show]
   get '/searchstuff', to: 'demos#search'
+
+  resources :sentiments, only: [:search, :show]
+  get '/sentiment', to: 'sentiment#search'
 end

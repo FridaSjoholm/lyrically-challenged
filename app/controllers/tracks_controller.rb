@@ -1,28 +1,46 @@
 class TracksController < ApplicationController
 
   include TracksHelper
+  include SentimentHelper
 
   def index
+    sesntiments = [
+      {
+        name: "Loved",
+        value: 'loved'
+      },
+      {
+        name: "Happy",
+        value: 'happy'
+      },
+      {
+        name: "Energetic",
+        value: 'energetic'
+      },
+      {
+        name: "Calm",
+        value: 'calm'
+      },
+      {
+        name: "Angry",
+        value: 'angry'
+      },
+      {
+        name: "Sad",
+        value: 'sad'
+      }]
+
+      @sentiments = "Loved, Happy, Energetic, Calm, Angry, Sad".split(", ")
+
+      @names = "Jin, Katie, Christian, Frida".split(", ")
+
     #Instead of an array of hashes, maybe there should be a madlib object?
-    @questions = [{"I want a ": ["love", "breakup"]}, {"song about ": ["someone, a girl, a boy"]}, {"named ": ["Christian", "Frida", "Katie", "Jin"]}]
+    @questions = [["I want a song that makes me feel ", @sentiments, "emotion"], ["about", @names, "name"]]
   end
 
   def search
 
     @tracks = TracksHelper::Track.lyrics_keywords(params[:word])
-    analyzer = Sentimental.new
-    # Load the default sentiment dictionaries
-    analyzer.load_defaults
-
-    # Set a global threshold
-    analyzer.threshold = 1
-    @valence = analyzer.score(params[:word])
-    
-    # @word = params[:word]
-    # url = "http://api.musicgraph.com/api/v2/track/search?api_key=" + ENV['MUSIC_GRAPH_API_KEY'] + "&lyrics_phrase=" + @word
-    # uri = URI(url)
-    # response = Net::HTTP.get(uri)
-    # @tracks = JSON.parse(response)
 
     respond_to do |format|
       if @tracks.length > 0
