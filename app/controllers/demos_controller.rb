@@ -57,17 +57,6 @@ class DemosController < ApplicationController
     document = language.document content
     annotation = document.annotate
 
-    # # p annotation.entities.count
-    # p "ANNOTATION ENTITIES"
-    # p annotation.entities
-    #
-    # p "ANNOTATION SENTIMENT SCORE"
-    # p annotation.sentiment.score
-    #
-    # p "ANNOTATION SENTIMENT MAGNITUDE"
-    # p annotation.sentiment.magnitude
-    # # p annotation.sentences.count
-
     respond_to do |format|
       if @tracks.length > 0
         @songs = []
