@@ -41,7 +41,6 @@ class TracksController < ApplicationController
   def search
 
     @tracks = TracksHelper::Track.lyrics_keywords(params[:word])
-
     respond_to do |format|
       if @tracks.length > 0
         format.html {render :show, layout: false}

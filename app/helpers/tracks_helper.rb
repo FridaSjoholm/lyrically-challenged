@@ -7,14 +7,14 @@ module TracksHelper
 
   #To use in a controller:
     # class SongsController < ApplicationController
-    #   include MusicGraph
+    #   include TracksHelper
 
   #Sample call in your controller:
-      # tracks = MusicGraph::Track.lyrics_keywords(params[:query])
-      #tracks =[#<MusicGraph::Track:0x007fcb9df03cd0 @release_year=2012, @track_spotify_id="55h7vJchibLdUkxdlX3fK7", @popularity="0.871385", @title="Treasure", @artist_name="Bruno Mars", @duration=179>,...]
+      # tracks = TracksHelper::Track.lyrics_keywords(params[:query])
+      #tracks =[#<TracksHelper::Track:0x007fcb9df03cd0 @release_year=2012, @track_spotify_id="55h7vJchibLdUkxdlX3fK7", @popularity="0.871385", @title="Treasure", @artist_name="Bruno Mars", @duration=179>,...]
 
   class Track
-    attr_reader :release_year, :title, :track_spotify_id, :popularity, :artist_name, :album_title, :lyrics
+    attr_reader :release_year, :title, :track_spotify_id, :popularity, :artist_name, :album_title, :lyrics, :audio_features
 
     API_URL = "http://api.musicgraph.com/api/v2/track/"
 
@@ -25,19 +25,12 @@ module TracksHelper
       @title = ActiveSupport::Inflector.transliterate(attributes["title"])
       @artist_name = ActiveSupport::Inflector.transliterate(attributes["artist_name"])
       @duration = attributes["duration"]
+
+      @audio_features = RSpotify::AudioFeatures.find(attributes["track_spotify_id"])
+      #audio_features include :valence, :danceability, :duration_ms, :energy, :instrumentalness, :liveness, :speechiness, :tempo, :time_signature, :mode
     end
 
-    def self.search(params)
-      if params.is_a? String
-        response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&title=#{params}")
-      elsif params.is_a? Hash
-        encoded_params = URI.encode_www_form(params)
-        response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&#{encoded_params}")
-      end
-      tracks = JSON.parse(response.body)["data"]
-      tracks.map { |attributes| new(attributes) }
-    end
-
+    #Initialize new tracks with attrs from API calls to (1)MusicGraph and (2)Spotify
     def self.lyrics_keywords(params)
       sanitized_string = params.gsub("'","")
       if params.is_a? String
@@ -75,4 +68,15 @@ module TracksHelper
     end
 
   end
+end
+
+def self.search(params)
+  if params.is_a? String
+    response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&title=#{params}")
+  elsif params.is_a? Hash
+    encoded_params = URI.encode_www_form(params)
+    response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&#{encoded_params}")
+  end
+  tracks = JSON.parse(response.body)["data"]
+  tracks.map { |attributes| new(attributes) }
 end
