@@ -24,7 +24,8 @@ class TracksController < ApplicationController
   #Search by keyword and sentiment
   def search_with_sentiment
     @form_feeling = params[:feeling]
-    @tracks = TracksHelper::Track.lyrics_keywords(params[:word]).select{ |t| t.match_sentiment(@form_feeling)}
+    p "in search_with_sentiment"
+    @tracks = TracksHelper::Track.lyrics_keywords(params[:word], 20).select{ |t| t.match_sentiment(@form_feeling)}
     respond_to do |format|
       if @tracks.length > 0
         format.html {render :show, layout: false}

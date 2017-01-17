@@ -41,6 +41,8 @@ module TracksHelper
 
     #Find tracks by a given keyword, initialize new tracks with attrs
     def self.lyrics_keywords(params, limit=12) #TD: RENAME - self.get_tracks_by_keyword
+      p "LIMIT IS"
+      p limit 
       sanitized_string = params.gsub("'","")
       if params.is_a? String
         response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&limit=#{limit}&lyrics_keywords=#{sanitized_string}")
