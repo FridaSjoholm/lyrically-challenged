@@ -19,15 +19,24 @@ module TracksHelper
     API_URL = "http://api.musicgraph.com/api/v2/track/"
 
     def initialize(attributes)
+      #[MusicGraph]
       @release_year = attributes["release_year"]
       @track_spotify_id = attributes["track_spotify_id"]
       @popularity = attributes["popularity"]
-      @title = ActiveSupport::Inflector.transliterate(attributes["title"])
-      @artist_name = ActiveSupport::Inflector.transliterate(attributes["artist_name"])
+      @title = attributes["title"]
+      @artist_name = attributes["artist_name"]
       @duration = attributes["duration"]
 
+      #[Lyricfy] Get lyrics, set to nil if error
+      begin
+        @lyrics = get_lyrics(format_for_lyrics_wikia(attributes["title"], attributes["artist_name"]))
+      rescue ArgumentError => e
+        @lyrics = nil
+      end
+
+      #[RSpotify] Get audio_features for track
+        #audio_features include :valence, :danceability, :duration_ms, :energy, :instrumentalness, :liveness, :speechiness, :tempo, :time_signature, :mode
       @audio_features = RSpotify::AudioFeatures.find(attributes["track_spotify_id"])
-      #audio_features include :valence, :danceability, :duration_ms, :energy, :instrumentalness, :liveness, :speechiness, :tempo, :time_signature, :mode
     end
 
     #Initialize new tracks with attrs from API calls to (1)MusicGraph and (2)Spotify
@@ -47,72 +56,56 @@ module TracksHelper
       tracks.select { |track| track.key?("track_spotify_id") }
     end
 
-    # def self.search(params)
-    #   if params.is_a? String
-    #     response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&title=#{params}")
-    #   elsif params.is_a? Hash
-    #     encoded_params = URI.encode_www_form(params)
-    #     response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&#{encoded_params}")
-    #   end
-    #   tracks = JSON.parse(response.body)["data"]
-    #   tracks.map { |attributes| new(attributes) }
-    # end
-
-#Filter by matching given feeling
-def match_sentiment(form_feeling)
-    if form_feeling == "sad"
-      p "You want to be sad"
-      audio_features.valence < 0.4
-    elsif form_feeling == "angry"
-      p "You want to be angry"
-      audio_features.valence >= 0.4 && audio_features.valence <= 0.6
-    elsif form_feeling == "calm"
-      p "You want to be calm"
-      audio_features.valence > 0.4 && audio_features.tempo < 100
-    elsif form_feeling == "happy"
-      p "You want to be happy"
-      audio_features.valence > 0.6
-    end
-  end
+    #Filter by matching given feeling
+    def match_sentiment(form_feeling)
+        if form_feeling == "sad"
+          p "You want to be sad"
+          audio_features.valence < 0.4
+        elsif form_feeling == "angry"
+          p "You want to be angry"
+          audio_features.valence >= 0.4 && audio_features.valence <= 0.6
+        elsif form_feeling == "calm"
+          p "You want to be calm"
+          audio_features.valence > 0.4 && audio_features.tempo < 100
+        elsif form_feeling == "happy"
+          p "You want to be happy"
+          audio_features.valence > 0.6
+        end
+      end
 
 
 
-    def lyrics
-      fetcher = Lyricfy::Fetcher.new
-      begin
-        if fetcher.search @artist_name, @title
-          song = fetcher.search @artist_name, @title
-          song.body("\n")
+      def format_for_lyrics_wikia(title, artist_name)
+        title = ActiveSupport::Inflector.transliterate(title)
+        title_arr = title.split(" ")
+        title = title_arr.join("_")
+        title = title.delete("#")
+        title = title.gsub(/_?\[(.*?)\]/, "")
 
-        else
+        artist_name = ActiveSupport::Inflector.transliterate(artist_name)
+        artist_arr = artist_name.split(" ")
+        artist_arr.map(&:capitalize!)
+        artist_name = artist_arr.join("_")
+        artist_name = URI.escape(artist_name, /[?#]/)
+        return {title:title, artist_name: artist_name}
+      end
+
+      def get_lyrics(args)
+        fetcher = Lyricfy::Fetcher.new
+        x = args[:artist_name]
+        y = args[:title]
+        song = fetcher.search(x, y)
+        begin
+          if song
+            song.body("\n")
+          else
+            return "Lyric not found"
+          end
+        rescue NoMethodError => e
           return "Lyric not found"
         end
-      rescue NoMethodError => e
-        return "Lyric not found"
       end
-    end
 
-    def format_for_lyrics_wikia
-      title_arr = @title.split(" ")
-      @brantitle = title_arr.join("_")
-      @title = @title.delete("#")
-      @title = @title.gsub(/_?\[(.*?)\]/, "")
-      artist_arr = @artist_name.split(" ")
-      artist_arr.map(&:capitalize!)
-      @artist_name = artist_arr.join("_")
-      @artist_name = URI.escape(@artist_name, /[?#]/)
-    end
 
-  end
-end
-
-def self.search(params)
-  if params.is_a? String
-    response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&title=#{params}")
-  elsif params.is_a? Hash
-    encoded_params = URI.encode_www_form(params)
-    response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&#{encoded_params}")
-  end
-  tracks = JSON.parse(response.body)["data"]
-  tracks.map { |attributes| new(attributes) }
-end
+  end#for Class
+end#for Module

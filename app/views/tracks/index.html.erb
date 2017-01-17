@@ -43,12 +43,9 @@
           <div class="row">
             <div class="col-sm-7">
 
-              <%= form_tag("/sentiment", method: "get", class: "form-search", remote: true) do %>
-                <h1>Looking for a song about
-                <%= text_field_tag(:word) %></h1>
-                <%= select_tag :feeling, "<option value='sad'>Sad</option><option value='angry'>Angry</option><option value='calm'>Calm</option><option value='happy'>Happy</option>".html_safe %> <br />
-                <%= submit_tag("Search", class:"btn btn-send") %>
-              <% end %>
+              <%= render "tracks/forms/02_sentiment" %>
+
+
               <div class="portfolio-wrapper" >
                 <div class="col-md-12">
                   <ul class="filter">
@@ -79,7 +76,6 @@
           <div class="row">
             <div class="col-sm-7">
 
-              <%= render "tracks/forms/02_sentiment" %>
 
               <div class="portfolio-wrapper" >
                 <div class="col-md-12">
