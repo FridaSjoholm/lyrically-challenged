@@ -1,0 +1,26 @@
+<%= form_tag("/search", method: "get", class: "form-search", remote: true) do %>  <!-- Starting text of a question -->
+  <h1>Looking for a song about
+  <!-- Answer choices as a drop-down, with (placeholder) -->
+
+  <%= text_field_tag(:word, "", placeholder:"(topic)") %>
+  <!-- Starting text of a question -->
+  that makes me feel
+  <!-- Answer choices as a drop-down, with (placeholder) -->
+  <!-- <div class="btn-group">
+  <a class="btn dropdown-toggle dotted-btn" data-toggle="dropdown" href="#">(emotion)</span></a>
+  <ul class="dropdown-menu">
+  <li><a href="#">Sad </a></li>
+  <li><a href="#">Angry </a></li>
+  <li><a href="#">Calm </a></li>
+  <li><a href="#">Happy </a></li>
+  </ul>
+  </div> -->
+  <select name="feeling" class="dotted-btn">
+    <option value="happy">happy</option>
+    <option value="calm">calm</option>
+    <option value="angry">angry</option>
+    <option value="sad">sad</option>
+  </select>
+  <%= submit_tag("Search", class:"btn btn-send") %>
+  </h1>
+<% end %> <!-- form -->
