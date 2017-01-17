@@ -14,10 +14,10 @@ module SentimentHelper
       #tracks =[#<MusicGraph::Track:0x007fcb9df03cd0 @release_year=2012, @track_spotify_id="55h7vJchibLdUkxdlX3fK7", @popularity="0.871385", @title="Treasure", @artist_name="Bruno Mars", @duration=179>,...]
 
   class Sentiment
-    attr_reader :release_year, :title, :track_spotify_id, :popularity, :artist_name, :album_title, :lyrics
+    attr_reader :release_year, :title, :track_spotify_id, :popularity, :artist_name, :album_title, :lyrics, :audio_features
 
     API_URL = "http://api.musicgraph.com/api/v2/track/" #MUSICGRAPH_API_URL
-                                                        #SPOTIFY_API_URL
+    API_URL2 = "http://api.musicgraph.com/api/v2/track/" #SPOTIFY_API_URL
 
     def initialize(attributes)
       @release_year = attributes["release_year"]
@@ -26,9 +26,9 @@ module SentimentHelper
       @title = ActiveSupport::Inflector.transliterate(attributes["title"])
       @artist_name = ActiveSupport::Inflector.transliterate(attributes["artist_name"])
       @duration = attributes["duration"]
-
+      @audio_features = RSpotify::AudioFeatures.find(attributes["track_spotify_id"])
       #From Spotify (to add)
-      # @valence = audio_features.valence
+#      @valence = @audio_features["valence"]
       # @danceability = audio_features.danceability
       # @duration_ms = audio_features.duration_ms
       # @energy = audio_features.energy
@@ -55,13 +55,28 @@ module SentimentHelper
     def self.lyrics_keywords(params)
       sanitized_string = params.gsub("'","")
       if params.is_a? String
-        #pass in limit 
+        #pass in limit
         response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&limit=12&lyrics_keywords=#{sanitized_string}")
       end
       tracks = JSON.parse(response.body)["data"]
       tracks.map { |attributes| new(attributes) }
-      #filter tracks by sentiment
-      #tracks.filter{ |attributes|
+        # tracks.each do |track|
+        #   if track["track_spotify_id"] != nil
+        #
+        #   audio_features = RSpotify::AudioFeatures.find(track["track_spotify_id"])
+        #   track["valence"] = audio_features.valence
+        #   # byebug
+        #   # track.danceability = audio_features.danceability
+        #   # track.duration_ms = audio_features.duration_ms
+        #   # track.energy = audio_features.energy
+        #   # track.instrumentalness = audio_features.instrumentalness
+        #   # track.liveness = audio_features.liveness
+        #   # track.speechiness = audio_features.speechiness
+        #   # track.tempo = audio_features.tempo
+        #   # track.time_signature = audio_features.time_signature
+        #   # track.mode = audio_features.mode
+        #   end
+        # end
     end
 
 

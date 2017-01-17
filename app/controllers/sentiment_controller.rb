@@ -4,12 +4,12 @@ class SentimentController < ApplicationController
 
   def search
 
-    @tracks = SentimentHelper::Sentiment.lyrics_keywords(params[:word], params[:feeling])
+    @stracks = SentimentHelper::Sentiment.lyrics_keywords(params[:word] + " " + params[:feeling])
     @feeling = params[:feeling]
 #    @desired = params[:desired]
 
     respond_to do |format|
-      if @tracks.length > 0
+      if @stracks.length > 0
         format.html {render :show, layout: false}
       else
         flash[:danger] = 'There was a problem'
