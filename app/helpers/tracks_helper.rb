@@ -19,7 +19,7 @@ module TracksHelper
     API_URL = "http://api.musicgraph.com/api/v2/track/"
 
     def initialize(attributes)
-      #[MusicGraph]
+      #[MusicGraph] these attributes from MusicGraph
       @release_year = attributes["release_year"]
       @track_spotify_id = attributes["track_spotify_id"]
       @popularity = attributes["popularity"]
@@ -39,8 +39,8 @@ module TracksHelper
       @audio_features = RSpotify::AudioFeatures.find(attributes["track_spotify_id"])
     end
 
-    #Initialize new tracks with attrs from API calls to (1)MusicGraph and (2)Spotify
-    def self.lyrics_keywords(params, limit=12) #self.get_tracks_by_keyword
+    #Find tracks by a given keyword, initialize new tracks with attrs
+    def self.lyrics_keywords(params, limit=12) #TD: RENAME - self.get_tracks_by_keyword
       sanitized_string = params.gsub("'","")
       if params.is_a? String
         response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&limit=#{limit}&lyrics_keywords=#{sanitized_string}")
@@ -48,14 +48,14 @@ module TracksHelper
       tracks = JSON.parse(response.body)["data"]
       clean_tracks = clean_and_prepare_track_data(tracks)
       clean_tracks.map { |attributes| new(attributes) }
-      #set lyrics attribute for track
     end
 
-    #method to only display tracks that have valid spotify id's
+    #Only display tracks that have valid spotify id's
     def self.clean_and_prepare_track_data(tracks)
       tracks.select { |track| track.key?("track_spotify_id") }
     end
 
+    #For 02_sentiment madlib
     #Filter by matching given feeling
     def match_sentiment(form_feeling)
         if form_feeling == "sad"
@@ -74,7 +74,6 @@ module TracksHelper
       end
 
 
-
       def format_for_lyrics_wikia(title, artist_name)
         title = ActiveSupport::Inflector.transliterate(title)
         title_arr = title.split(" ")
@@ -90,6 +89,7 @@ module TracksHelper
         return {title:title, artist_name: artist_name}
       end
 
+      #[Lyricfy] Lyricfy gets lyrics from LyricsWikia or MetroMix
       def get_lyrics(args)
         fetcher = Lyricfy::Fetcher.new
         x = args[:artist_name]
@@ -105,7 +105,6 @@ module TracksHelper
           return "Lyric not found"
         end
       end
-
 
   end#for Class
 end#for Module

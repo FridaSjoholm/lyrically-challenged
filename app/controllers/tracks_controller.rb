@@ -1,39 +1,8 @@
 class TracksController < ApplicationController
 
   include TracksHelper
-  include SentimentHelper
 
   def index
-    sesntiments = [
-      {
-        name: "Loved",
-        value: 'loved'
-      },
-      {
-        name: "Happy",
-        value: 'happy'
-      },
-      {
-        name: "Energetic",
-        value: 'energetic'
-      },
-      {
-        name: "Calm",
-        value: 'calm'
-      },
-      {
-        name: "Angry",
-        value: 'angry'
-      },
-      {
-        name: "Sad",
-        value: 'sad'
-      }]
-
-      @sentiments = "Loved, Happy, Energetic, Calm, Angry, Sad".split(", ")
-
-      @names = "Jin, Katie, Christian, Frida".split(", ")
-
     #Instead of an array of hashes, maybe there should be a madlib object?
     @questions = [["I want a song that makes me feel ", @sentiments, "emotion"], ["about", @names, "name"]]
   end
