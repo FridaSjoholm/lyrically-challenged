@@ -45,6 +45,9 @@ class DemosController < ApplicationController
     # @speechiness = audio_features.speechiness
     # @tempo = audio_features.tempo
     # @time_signature = audio_features.time_signature
+    # @key
+    # @mode
+    #
 
     #See all audio_features here
     #https://developer.spotify.com/web-api/get-audio-features/

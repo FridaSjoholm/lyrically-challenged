@@ -4,26 +4,12 @@ class TracksController < ApplicationController
 
   def index
     #Instead of an array of hashes, maybe there should be a madlib object?
-    @questions = [{"I want a ": ["love", "breakup"]}, {"song about ": ["someone, a girl, a boy"]}, {"named ": ["Christian", "Frida", "Katie", "Jin"]}]
+    @questions = [["I want a song that makes me feel ", @sentiments, "emotion"], ["about", @names, "name"]]
   end
 
+#Search just by keyword(s)
   def search
-
     @tracks = TracksHelper::Track.lyrics_keywords(params[:word])
-    analyzer = Sentimental.new
-    # Load the default sentiment dictionaries
-    analyzer.load_defaults
-
-    # Set a global threshold
-    analyzer.threshold = 1
-    @valence = analyzer.score(params[:word])
-    
-    # @word = params[:word]
-    # url = "http://api.musicgraph.com/api/v2/track/search?api_key=" + ENV['MUSIC_GRAPH_API_KEY'] + "&lyrics_phrase=" + @word
-    # uri = URI(url)
-    # response = Net::HTTP.get(uri)
-    # @tracks = JSON.parse(response)
-
     respond_to do |format|
       if @tracks.length > 0
         format.html {render :show, layout: false}
@@ -33,6 +19,23 @@ class TracksController < ApplicationController
         format.json { }
       end
     end
-
   end
+
+  #Search by keyword and sentiment
+  def search_with_sentiment
+    @form_feeling = params[:feeling]
+    p "in search_with_sentiment"
+    @tracks = TracksHelper::Track.lyrics_keywords(params[:word], 20).select{ |t| t.match_sentiment(@form_feeling)}
+    respond_to do |format|
+      if @tracks.length > 0
+        format.html {render :show, layout: false}
+      else
+        flash[:danger] = 'There was a problem'
+        format.html { render :index }
+        format.json { }
+      end
+    end
+  end
+
+
 end

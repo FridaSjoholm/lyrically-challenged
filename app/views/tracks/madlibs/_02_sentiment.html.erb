@@ -1,0 +1,19 @@
+<%= form_tag("/search_with_sentiment", method: "get", class: "form-search", remote: true) do %>
+
+ <h1>Looking for a song about
+  <%= text_field_tag(:word, "", placeholder:"(topic)") %>
+
+  that makes me feel
+  <select name="feeling" class="dotted-btn">
+    <ul class="dropdown-menu">
+    <li><option value="happy">happy</option></li>
+    <li><option value="calm">calm</option></li>
+    <li><option value="angry">angry</option></li>
+    <li><option value="sad">sad</option></li>
+    </ul>
+  </select>
+
+  <%= submit_tag("Search", class:"btn btn-send") %>
+
+  </h1>
+<% end %> <!-- form -->
