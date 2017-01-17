@@ -31,13 +31,66 @@ module TracksHelper
     end
 
     #Initialize new tracks with attrs from API calls to (1)MusicGraph and (2)Spotify
-    def self.lyrics_keywords(params)
+    def self.lyrics_keywords(params, limit=12)
       sanitized_string = params.gsub("'","")
       if params.is_a? String
-        response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&limit=12&lyrics_keywords=#{sanitized_string}")
+        response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&limit=#{limit}&lyrics_keywords=#{sanitized_string}")
       end
       tracks = JSON.parse(response.body)["data"]
       tracks.map { |attributes| new(attributes) }
+    end
+
+#Filter by matching given feeling
+def self.match_sentiment(@feeling)
+    if @feeling == "sad"
+      p "You want to be sad"
+      @sad_tracks = []
+      @stracks.each do |track|
+        if track.audio_features != nil
+          if track.audio_features.valence < 0.4
+
+            @sad_tracks << track
+          end
+        end
+      end
+      @feeling_tracks = @sad_tracks
+    elsif @feeling == "angry"
+      p "You want to be angry"
+      @angry_tracks = []
+      @stracks.each do |track|
+        if track.audio_features != nil
+          if track.audio_features.valence >= 0.4 && track.audio_features.valence <= 0.6
+
+            @angry_tracks << track
+          end
+        end
+      end
+      @feeling_tracks = @angry_tracks
+    elsif @feeling == "calm"
+      p "You want to be calm"
+      @calm_tracks = []
+      @stracks.each do |track|
+        if track.audio_features != nil
+          if track.audio_features.valence > 0.4 && track.audio_features.tempo < 100
+
+            @calm_tracks << track
+          end
+        end
+      end
+      @feeling_tracks = @calm_tracks
+    elsif @feeling == "happy"
+      p "You want to be happy"
+      @happy_tracks = []
+      @stracks.each do |track|
+        if track.audio_features != nil
+          if track.audio_features.valence > 0.6
+
+            @happy_tracks << track
+          end
+        end
+      end
+      @feeling_tracks = @happy_tracks
+
     end
 
 
