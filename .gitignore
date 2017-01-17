@@ -20,3 +20,6 @@
 
 #Ignore dot env file
 /.env
+
+#Ignore Google Cloud API key's file
+lyricallychallenged-e7c2ba0fddf6.json
