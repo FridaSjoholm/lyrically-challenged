@@ -1,6 +1,56 @@
 class DemosController < ApplicationController
 
-  def index
+def index
+
+  require 'googleauth'
+  scopes =  ['https://www.googleapis.com/auth/cloud-platform', 'https://www.googleapis.com/auth/compute']
+  authorization = Google::Auth.get_application_default(scopes)
+  p "in google auth!"
+
+  # require "google/apis/storage_v1"
+  # #authorization cp from https://developers.google.com/identity/protocols/application-default-credentials
+  # storage = Google::Apis::StorageV1::StorageService.new
+  # storage.authorization = authorization
+
+  #christian says try some headers
+  some_headers = {}
+  authorization.apply(some_headers)
+
+  require 'google/cloud/language'
+  #example from website
+  language = Google::Cloud::Language.new
+
+  content = "The evil witch said, I love you"
+  document = language.document content
+  annotation = document.annotate
+
+  p "annotation entities"
+  p annotation.entities
+  p annotation.entities.count #=> 3
+
+  p "annotation.sentiment"
+  p annotation.sentiment
+  p annotation.sentiment.score #=> 0.10000000149011612
+
+  p annotation.sentiment.magnitude #=> 1.100000023841858
+  p annotation.sentences.count #=> 2
+
+  p "annotation.tokens"
+  p annotation.tokens
+  p annotation.tokens.count #=> 13
+
+
+  #some helpful vocabulary
+  #lemma (plural lemmas or lemmata) is the canonical form, dictionary form, or citation form of a set of words (headword) [citation needed]. In English, for example, run, runs, ran and running are forms of the same lexeme, with run as the lemma.
+
+  # Mood: The indicative mood is a verb form which makes a statement or asks a question. For example: Jack sings every Friday. (This is a verb in the indicative mood.)
+
+end
+
+
+
+
+#  def index
     # #Sample call to Spotify
     #
     # # #Happy by Pharrel Williams, spotify_id = "6NPVjNh8Jhru9xOmyQigds"
@@ -23,7 +73,7 @@ class DemosController < ApplicationController
 
     #See all audio_features here
     #https://developer.spotify.com/web-api/get-audio-features/
-  end
+#  end
 
   def search
     @tracks = TracksHelper::Track.lyrics_keywords(params[:word])
