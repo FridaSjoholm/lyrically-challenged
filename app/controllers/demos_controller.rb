@@ -1,31 +1,6 @@
 class DemosController < ApplicationController
 
   def index
-    require 'googleauth'
-    # Get the environment configured authorization
-    scopes =  ['https://www.googleapis.com/auth/cloud-platform',
-               'https://www.googleapis.com/auth/compute']
-    authorization = Google::Auth.get_application_default(scopes)
-
-    # Add the the access token obtained using the authorization to a hash, e.g
-    # headers.
-    some_headers = {}
-    authorization.apply(some_headers)
-
-    require "google/cloud/language"
-
-    # language = Google::Cloud::Language.new
-
-    # content = "Star Wars is a great movie. The Death Star is fearsome."
-    # document = language.document content
-    # annotation = document.annotate
-    #
-    # p annotation.entities.count #=> 3
-    # p annotation.sentiment.score #=> 0.10000000149011612
-    # p annotation.sentiment.magnitude #=> 1.100000023841858
-    # p annotation.sentences.count #=> 2
-    # p annotation.tokens.count #=> 13
-
     # #Sample call to Spotify
     #
     # # #Happy by Pharrel Williams, spotify_id = "6NPVjNh8Jhru9xOmyQigds"
@@ -52,45 +27,64 @@ class DemosController < ApplicationController
 
   def search
     @tracks = TracksHelper::Track.lyrics_keywords(params[:word])
-    language = Google::Cloud::Language.new
-    content = @tracks
-    document = language.document content
-    annotation = document.annotate
+    # analyzer = Sentimental.new
+    # # Load the default sentiment dictionaries
+    # analyzer.load_defaults
+    #
+    # # Set a global threshold
+    # analyzer.threshold = 0.1
+    # @valence = analyzer.score(params[:word])
 
-    respond_to do |format|
-      if @tracks.length > 0
-        @songs = []
-        @tracks.each do |track|
-          if track.track_spotify_id != nil
-            song = RSpotify::AudioFeatures.find(track.track_spotify_id)
+    # require 'net/http'
+    #
+    # uri = URI('https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/languages')
+    # uri.query = URI.encode_www_form({
+    #     # Request parameters
+    #     'numberOfLanguagesToDetect' => 1
+    # })
+    #
+    # request = Net::HTTP::Post.new(uri.request_uri)
+    # # Request headers
+    # request['Content-Type'] = 'application/json'
+    # # Request headers
+    # request['Ocp-Apim-Subscription-Key'] = ENV['MICROSOFT_API_KEY']
+    # # Request body
+    # request.body = params[:word]
+    #
+    # response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
+    #     http.request(request)
+    # end
+    #
+    # puts response.body
 
-            if song.valence < 0.2 && annotation.sentiment.score < -(0.4)
-              @songs << track
-            elsif (song.valence > 0.2 && song.valence < 0.4) && (annotation.sentiment.score < 0 && annotation.sentiment.score > -(0.4))
-              @songs << track
-            elsif (song.valence > 0.4 && song.valence < 0.6) && (annotation.sentiment.score < 0.5 && annotation.sentiment.score > 0)
-              @songs << track
-            elsif (song.valence > 0.6 && song.valence <= 1) && (annotation.sentiment.score > 0.5 && annotation.sentiment.score <= 1)
-              @songs << track
-            end
-          else
-            if annotation.sentiment.score < -(0.4)
-              @songs << track
-            elsif annotation.sentiment.score < 0 && annotation.sentiment.score > -(0.4)
-              @songs << track
-            elsif annotation.sentiment.score < 0.5 && annotation.sentiment.score > 0
-              @songs << track
-            elsif annotation.sentiment.score <= 1 && annotation.sentiment.score > 0.5
-              @songs << track
-            end
-          end
-        end
-        format.html {render :show, layout: false}
-      else
-        flash[:danger] = 'There was a problem'
-        format.html { render :index }
-        format.json { }
-      end
-    end
+
+
+    # respond_to do |format|
+    #   if @tracks.length > 0
+    #     @songs = []
+    #     @tracks.each do |track|
+    #       if track.track_spotify_id != nil
+    #         song = RSpotify::AudioFeatures.find(track.track_spotify_id)
+    #         if song.valence < 0.3
+    #           @songs << track
+    #         elsif song.valence > 0.3
+    #           @songs << track
+    #         end
+    #       else
+    #         p "Something"
+    #         # if @valence < -(0.5)
+    #         #   @songs << track
+    #         # elsif @valence > -(0.5)
+    #         #   @songs << track
+    #         # end
+    #       end
+    #     end
+    #     format.html {render :show, layout: false}
+    #   else
+    #     flash[:danger] = 'There was a problem'
+    #     format.html { render :index }
+    #     format.json { }
+    #   end
+    # end
   end
 end
