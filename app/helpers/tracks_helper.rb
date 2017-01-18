@@ -47,14 +47,18 @@ module TracksHelper
     end
 
     #Find tracks by a given keyword, initialize new tracks with attrs
-    def self.lyrics_keywords(params, limit=12) #TD: RENAME - self.get_tracks_by_keyword
-      p "LIMIT IS"
-      p limit
+    def self.lyrics_keywords(params, limit=12, genre="") #TD: RENAME - self.get_tracks_by_keyword
       sanitized_string = params.gsub("'","")
+
+      # if genre, get and sanitize
+      if genre != ""
+        genre_url = "&genre=#{genre}"
+      end
+
       if params.is_a? String
-        response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&limit=#{limit}&lyrics_keywords=#{sanitized_string}")
-        p "response" * 80
+        response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&limit=#{limit}&lyrics_keywords=#{sanitized_string}" + "#{genre_url}")
         p response
+
       end
       tracks = JSON.parse(response.body)["data"]
       clean_tracks = clean_and_prepare_track_data(tracks)
@@ -135,7 +139,6 @@ module TracksHelper
           audio_features.valence < 0.5 && audio_features.energy > 0.5
         end
       end
-
 
   end#for Class
 end#for Module

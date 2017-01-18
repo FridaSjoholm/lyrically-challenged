@@ -2,6 +2,10 @@ class TracksController < ApplicationController
   include TracksHelper
 
   def index
+    @genres = ["Alternative/Indie", "Blues", "Cast Recordings/Cabaret", "Christian/Gospel", "Children's",
+              "Classical/Opera", "Comedy/Spoken Word", "Country", "Electronica/Dance", "Folk",
+              "Jazz", "Latin", "New Age", "Pop", "Rap/Hip Hop", "Reggae/Ska", "Rock", "Seasonal", "Soul/R&B",
+              "Soundtracks", "Vocals", "World"]
     #Instead of an array of hashes, maybe there should be a madlib object?
     @questions = [["I want a song that makes me feel ", @sentiments, "emotion"], ["about", @names, "name"]]
   end
@@ -93,6 +97,21 @@ end
       end
     end
   end
+
+  def search_with_genre
+
+    p "in search_with_genre"
+    @tracks = TracksHelper::Track.lyrics_keywords(params[:word], 12, params[:genre])
+      respond_to do |format|
+        if @tracks.length > 0
+          format.html {render :show, layout: false}
+        else
+          flash[:danger] = 'There was a problem'
+          format.html { render :_no_results, layout: false }
+          format.json { }
+        end
+      end
+    end
 
 
 end
