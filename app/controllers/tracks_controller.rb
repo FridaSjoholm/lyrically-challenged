@@ -48,7 +48,7 @@ class TracksController < ApplicationController
     # Get the environment configured authorization
     scopes =  ['https://www.googleapis.com/auth/cloud-platform',
                'https://www.googleapis.com/auth/compute']
-    authorization = Google::Auth.get_application_default(scopes) 
+    authorization = Google::Auth.get_application_default(scopes)
 
     # Add the the access token obtained using the authorization to a hash, e.g
     # headers.
@@ -178,7 +178,7 @@ end
           format.json { }
         end
       end
-    end
+  end
 
 
 end
