@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   get "/search_for_dance", to: "tracks#search_for_dance"
   get "/search_with_genre", to: "tracks#search_with_genre"
 
+  get "/see_more", to: "tracks#see_more"
+
+
 
 
   resources :demos, only: [:index, :searchstuff, :show]

@@ -1,4 +1,4 @@
-$(function() {
+$(document).on("turbolinks:load", function() {
 
 //when ajax call made, but data not yet sent back
   //show the loading... message, hide the old results from the last query
@@ -28,6 +28,12 @@ $(function() {
   $(".feelings-search").on("ajax:beforeSend", function() {
     $('#show-songs').hide();
     $('.f-pending-message').show();
+  });
+
+  $("#show-area").on("ajax:success", ".see-more a", function(e, data, status, xhr) {
+    $(".see-more").hide()
+    $("#show-area").append(data);
+
   });
 
 });
