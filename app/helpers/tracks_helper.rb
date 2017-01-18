@@ -14,7 +14,7 @@ module TracksHelper
       #tracks =[#<TracksHelper::Track:0x007fcb9df03cd0 @release_year=2012, @track_spotify_id="55h7vJchibLdUkxdlX3fK7", @popularity="0.871385", @title="Treasure", @artist_name="Bruno Mars", @duration=179>,...]
 
   class Track
-    attr_reader :release_year, :title, :track_spotify_id, :popularity, :artist_name, :album_title, :lyrics, :genre, :track_youtube_id :audio_features
+    attr_reader :release_year, :title, :track_spotify_id, :popularity, :artist_name, :album_title, :lyrics, :genre, :track_youtube_id, :audio_features
 
     API_URL = "http://api.musicgraph.com/api/v2/track/"
 
