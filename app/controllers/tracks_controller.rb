@@ -15,7 +15,7 @@ class TracksController < ApplicationController
         format.html {render :show, layout: false}
       else
         flash[:danger] = 'There was a problem'
-        format.html { render :index }
+        format.html { render :_no_results, layout: false }
         format.json { }
       end
     end
