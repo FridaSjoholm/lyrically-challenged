@@ -14,7 +14,8 @@ module TracksHelper
       #tracks =[#<TracksHelper::Track:0x007fcb9df03cd0 @release_year=2012, @track_spotify_id="55h7vJchibLdUkxdlX3fK7", @popularity="0.871385", @title="Treasure", @artist_name="Bruno Mars", @duration=179>,...]
 
   class Track
-    attr_reader :release_year, :title, :track_spotify_id, :popularity, :artist_name, :album_title, :lyrics, :audio_features
+    attr_reader :release_year, :title, :track_spotify_id, :popularity, :artist_name, :album_title, :lyrics, :genre, :track_youtube_id, :audio_features
+
 
     API_URL = "http://api.musicgraph.com/api/v2/track/"
 
@@ -26,6 +27,12 @@ module TracksHelper
       @title = attributes["title"]
       @artist_name = attributes["artist_name"]
       @duration = attributes["duration"]
+      @genre = attributes["main_genre"]
+      @track_youtube_id = attributes['track_youtube_id']
+
+
+      @audio_features = RSpotify::AudioFeatures.find(attributes["track_spotify_id"])
+      #audio_features include :valence, :danceability, :duration_ms, :energy, :instrumentalness, :liveness, :speechiness, :tempo, :time_signature, :mode
 
       #[Lyricfy] Get lyrics, set to nil if error
       begin
@@ -76,7 +83,7 @@ module TracksHelper
           p "You want to be happy"
           audio_features.valence > 0.6
         end
-      end
+    end
 
       def format_for_lyrics_wikia(title, artist_name)
         title = ActiveSupport::Inflector.transliterate(title)
