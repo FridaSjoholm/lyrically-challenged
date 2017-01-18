@@ -1,28 +1,6 @@
 <div class="form">
-            madlib feature coming soon...
-            <!-- TD: In future, iterate through all questions -->
-              <%= render partial: "tracks/carousel/question", locals:{question:@questions[0]} %>
-        				It begins at
-        					<div class="btn-group">
-        					<a class="btn dropdown-toggle dotted-btn" data-toggle="dropdown" href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span></a>
-        					<ul class="dropdown-menu">
-        						<li><a href="#">1 o'clock</a></li>
-        						<li><a href="#">2 o'clock</a></li>
-        						<li><a href="#">half past noon</a></li>
-        						<li><a href="#">11 o'clock</a></li>
-        						<li><a href="#">midnight</a></li>
-        					</ul>
-        				</div>. Please be sure to bring
-
-        			<div class="row">
-        				your favorite
-        					<div class="btn-group">
-        					<a class="btn dropdown-toggle dotted-btn" data-toggle="dropdown" href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span></a>
-        					<ul class="dropdown-menu">
-        						<li><a href="#">sword</a></li>
-        						<li><a href="#">necklace</a></li>
-        						<li><a href="#">snack</a></li>
-        					</ul>
-        				</div> <!-- item -->
-        			</div> <!-- row -->
+  <!-- Presents each question and answer choices as a partial -->
+    <% @questions.each do |question| %>
+      <%= render partial: "tracks/carousel/question", locals:{question: question} %>
+    <% end %>
 </div> <!-- form -->

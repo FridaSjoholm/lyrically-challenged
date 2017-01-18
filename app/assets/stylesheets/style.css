@@ -1113,3 +1113,7 @@ input {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+form h1 {
+    line-height: 50px !important;
+}
