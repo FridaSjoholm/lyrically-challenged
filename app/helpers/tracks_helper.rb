@@ -42,7 +42,7 @@ module TracksHelper
     #Find tracks by a given keyword, initialize new tracks with attrs
     def self.lyrics_keywords(params, limit=12) #TD: RENAME - self.get_tracks_by_keyword
       p "LIMIT IS"
-      p limit 
+      p limit
       sanitized_string = params.gsub("'","")
       if params.is_a? String
         response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&limit=#{limit}&lyrics_keywords=#{sanitized_string}")
@@ -75,6 +75,44 @@ module TracksHelper
         end
       end
 
+    #Helper method for tracking your feelings in a day form
+    def feelings_day(feelings)
+      require 'googleauth'
+      # Get the environment configured authorization
+      scopes =  ['https://www.googleapis.com/auth/cloud-platform',
+                 'https://www.googleapis.com/auth/compute']
+      authorization = Google::Auth.get_application_default(scopes)
+
+      # Add the the access token obtained using the authorization to a hash, e.g
+      # headers.
+      some_headers = {}
+      authorization.apply(some_headers)
+
+      require "google/cloud/language"
+      language = Google::Cloud::Language.new
+      content = feelings
+      document = language.document content
+      annotation = document.annotate
+
+      # if annotation.sentiment.score < -(0.4)
+      #    audio_features.valence < convert_google_sentiment_to_spotify_valence(-0.4)
+      # elsif (annotation.sentiment.score < 0 && annotation.sentiment.score > -(0.4))
+      #   p "sad"
+      # elsif (annotation.sentiment.score < 0.5 && annotation.sentiment.score > 0)
+      #   p "Sort of happu"
+      # elsif (annotation.sentiment.score > 0.5 && annotation.sentiment.score <= 1)
+      #   p "HAppy "
+      # else
+      #   p "ooppss"
+      # end
+
+      return (audio_features.valence < convert_google_sentiment_to_spotify_valence(annotation.sentiment.score) + 0.5) && (audio_features.valence > convert_google_sentiment_to_spotify_valence(annotation.sentiment.score) - 0.5)
+
+    end
+
+    def convert_google_sentiment_to_spotify_valence(gsentiment)
+      return 0.5 + (gsentiment/2)
+    end
 
       def format_for_lyrics_wikia(title, artist_name)
         title = ActiveSupport::Inflector.transliterate(title)

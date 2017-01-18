@@ -37,5 +37,18 @@ class TracksController < ApplicationController
     end
   end
 
-
+  def feelings_search
+    byebug
+    @day_feeling = params[:day]
+    @tracks = TracksHelper::Track.lyrics_keywords(params[:feeling], 20).select{ |t| t.feelings_day(@day_feeling)}
+    respond_to do |format|
+      if @track.length > 0
+        format.html {render :show, layout: false}
+      else
+        flash[:danger] = 'There was a problem'
+        format.html { render :index }
+        format.json { }
+      end
+    end
+  end
 end

@@ -1,0 +1,12 @@
+<%= form_tag("/feelings_search", method: "get", class: "form-search", remote: true) do %>
+
+ <h1> Today was a
+  <%= text_field_tag(:day, "", placeholder:"(How was your day)") %>
+
+  and I'm feeling
+  <%= text_field_tag(:feeling, "", placeholder:"(How are you feeling)") %>
+
+  <%= submit_tag("Search", class:"btn btn-send") %>
+
+  </h1>
+<% end %> <!-- form -->
