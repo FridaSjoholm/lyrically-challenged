@@ -52,7 +52,7 @@ class TracksController < ApplicationController
     authorization.apply(some_headers)
 
     @day_feeling = params[:day]
-    @tracks = TracksHelper::Track.lyrics_keywords(params[:feeling])
+    @tracks = TracksHelper::Track.lyrics_keywords(params[:feeling], 20)
 
     require "google/cloud/language"
     language = Google::Cloud::Language.new
@@ -63,35 +63,34 @@ class TracksController < ApplicationController
 
     respond_to do |format|
       if @tracks.length > 0
+        @songs = []
         @tracks.each do |track|
-
           if track.track_spotify_id != nil
             song = RSpotify::AudioFeatures.find(track.track_spotify_id)
-
             if song.valence < 0.2 && annotation.sentiment.score < -(0.4)
-              @tracks << track
+              @songs << track
             elsif (song.valence > 0.2 && song.valence < 0.4) && (annotation.sentiment.score < 0 && annotation.sentiment.score > -(0.4))
-              @tracks << track
+              @songs << track
             elsif (song.valence > 0.4 && song.valence < 0.6) && (annotation.sentiment.score < 0.5 && annotation.sentiment.score > 0)
-              @tracks << track
+              @songs << track
             elsif (song.valence > 0.6 && song.valence <= 1) && (annotation.sentiment.score > 0.5 && annotation.sentiment.score <= 1)
-              @tracks << track
+              @songs << track
             end
 
           else
             if annotation.sentiment.score < -(0.4)
-              @tracks << track
+              @songs << track
             elsif annotation.sentiment.score < 0 && annotation.sentiment.score > -(0.4)
-              @tracks << track
+              @songs << track
             elsif annotation.sentiment.score < 0.5 && annotation.sentiment.score > 0
-              @tracks << track
+              @songs << track
             elsif annotation.sentiment.score <= 1 && annotation.sentiment.score > 0.5
-              @tracks << track
+              @songs << track
             end
           end
 
         end
-        format.html {render :show, layout: false}
+        format.html {render :feelings, layout: false}
       else
         flash[:danger] = 'There was a problem'
         format.html { render :index }

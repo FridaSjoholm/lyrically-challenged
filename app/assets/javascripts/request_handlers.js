@@ -26,7 +26,7 @@ $(function() {
   });
 
   $(".feelings-search").on("ajax:beforeSend", function() {
-    $('#show-sogns').hide();
+    $('#show-songs').hide();
     $('.f-pending-message').show();
   });
 
