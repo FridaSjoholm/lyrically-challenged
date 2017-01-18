@@ -38,10 +38,58 @@ class TracksController < ApplicationController
 
   # Search by the type of day you are having
   def feelings_search
+
+    require 'googleauth'
+    # Get the environment configured authorization
+    scopes =  ['https://www.googleapis.com/auth/cloud-platform',
+               'https://www.googleapis.com/auth/compute']
+    authorization = Google::Auth.get_application_default(scopes)
+
+    # Add the the access token obtained using the authorization to a hash, e.g
+    # headers.
+    some_headers = {}
+    authorization.apply(some_headers)
+
     @day_feeling = params[:day]
-    @tracks = TracksHelper::Track.lyrics_keywords(params[:feeling], 20).select{ |t| t.feelings_day(@day_feeling)}
+    @tracks = TracksHelper::Track.lyrics_keywords(params[:feeling])
+
+    require "google/cloud/language"
+    language = Google::Cloud::Language.new
+    content = @day_feeling
+    document = language.document content
+    annotation = document.annotate
+
+
     respond_to do |format|
-      if @track.length > 0
+      if @tracks.length > 0
+        @tracks.each do |track|
+
+          if track.track_spotify_id != nil
+            song = RSpotify::AudioFeatures.find(track.track_spotify_id)
+
+            if song.valence < 0.2 && annotation.sentiment.score < -(0.4)
+              @tracks << track
+            elsif (song.valence > 0.2 && song.valence < 0.4) && (annotation.sentiment.score < 0 && annotation.sentiment.score > -(0.4))
+              @tracks << track
+            elsif (song.valence > 0.4 && song.valence < 0.6) && (annotation.sentiment.score < 0.5 && annotation.sentiment.score > 0)
+              @tracks << track
+            elsif (song.valence > 0.6 && song.valence <= 1) && (annotation.sentiment.score > 0.5 && annotation.sentiment.score <= 1)
+              @tracks << track
+            end
+
+          else
+            if annotation.sentiment.score < -(0.4)
+              @tracks << track
+            elsif annotation.sentiment.score < 0 && annotation.sentiment.score > -(0.4)
+              @tracks << track
+            elsif annotation.sentiment.score < 0.5 && annotation.sentiment.score > 0
+              @tracks << track
+            elsif annotation.sentiment.score <= 1 && annotation.sentiment.score > 0.5
+              @tracks << track
+            end
+          end
+
+        end
         format.html {render :show, layout: false}
       else
         flash[:danger] = 'There was a problem'

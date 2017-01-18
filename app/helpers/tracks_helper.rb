@@ -80,22 +80,22 @@ module TracksHelper
 
     #Helper method for tracking your feelings in a day form
     def feelings_day(feelings)
-      require 'googleauth'
-      # Get the environment configured authorization
-      scopes =  ['https://www.googleapis.com/auth/cloud-platform',
-                 'https://www.googleapis.com/auth/compute']
-      authorization = Google::Auth.get_application_default(scopes)
-
-      # Add the the access token obtained using the authorization to a hash, e.g
-      # headers.
-      some_headers = {}
-      authorization.apply(some_headers)
-
-      require "google/cloud/language"
-      language = Google::Cloud::Language.new
-      content = feelings
-      document = language.document content
-      annotation = document.annotate
+      # require 'googleauth'
+      # # Get the environment configured authorization
+      # scopes =  ['https://www.googleapis.com/auth/cloud-platform',
+      #            'https://www.googleapis.com/auth/compute']
+      # authorization = Google::Auth.get_application_default(scopes)
+      #
+      # # Add the the access token obtained using the authorization to a hash, e.g
+      # # headers.
+      # some_headers = {}
+      # authorization.apply(some_headers)
+      #
+      # require "google/cloud/language"
+      # language = Google::Cloud::Language.new
+      # content = feelings
+      # document = language.document content
+      # annotation = document.annotate
 
       # if annotation.sentiment.score < -(0.4)
       #    audio_features.valence < convert_google_sentiment_to_spotify_valence(-0.4)
@@ -109,7 +109,7 @@ module TracksHelper
       #   p "ooppss"
       # end
 
-      return (audio_features.valence < convert_google_sentiment_to_spotify_valence(annotation.sentiment.score) + 0.5) && (audio_features.valence > convert_google_sentiment_to_spotify_valence(annotation.sentiment.score) - 0.5)
+      # return (audio_features.valence < convert_google_sentiment_to_spotify_valence(annotation.sentiment.score) + 0.5) && (audio_features.valence > convert_google_sentiment_to_spotify_valence(annotation.sentiment.score) - 0.5)
 
     end
 

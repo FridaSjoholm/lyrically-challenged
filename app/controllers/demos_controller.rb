@@ -16,7 +16,7 @@ class DemosController < ApplicationController
 
     language = Google::Cloud::Language.new
 
-    content = "amazing"
+    content = "kewl"
     document = language.document content
     annotation = document.annotate
 
