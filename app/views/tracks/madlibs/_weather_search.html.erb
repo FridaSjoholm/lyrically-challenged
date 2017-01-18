@@ -1,0 +1,24 @@
+<%= form_tag("/weather_search", method: "get", class: "form-search", remote: true) do %>
+
+ <h1>Today is a
+  <select name="weather" class="dotted-btn">
+    <ul class="dropdown-menu">
+    <li><option value="rainy day">rainy</option></li>
+    <li><option value="cloudy day">cloudy</option></li>
+    <li><option value="sunny day">sunny</option></li>
+    <li><option value="snowy day">snowy</option></li>
+    </ul>
+  </select>
+  day, and I want to
+  <select name="want_to" class="dotted-btn">
+    <ul class="dropdown-menu">
+    <li><option value="dance">dance</option></li>
+    <li><option value="chill">chill</option></li>
+    <li><option value="sulk">sulk</option></li>
+    <li><option value="rage">rage</option></li>
+    </ul>
+  </select>
+  <%= submit_tag("Search", class:"btn btn-send") %>
+
+  </h1>
+<% end %> <!-- form -->

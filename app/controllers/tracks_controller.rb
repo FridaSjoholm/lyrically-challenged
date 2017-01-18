@@ -1,5 +1,4 @@
 class TracksController < ApplicationController
-
   include TracksHelper
 
   def index
@@ -15,7 +14,7 @@ class TracksController < ApplicationController
         format.html {render :show, layout: false}
       else
         flash[:danger] = 'There was a problem'
-        format.html { render :index }
+        format.html { render :_no_results, layout: false }
         format.json { }
       end
     end
@@ -37,8 +36,8 @@ class TracksController < ApplicationController
     end
   end
 
+  # Search by the type of day you are having
   def feelings_search
-    byebug
     @day_feeling = params[:day]
     @tracks = TracksHelper::Track.lyrics_keywords(params[:feeling], 20).select{ |t| t.feelings_day(@day_feeling)}
     respond_to do |format|
@@ -51,4 +50,64 @@ class TracksController < ApplicationController
       end
     end
   end
+
+  #Search by what you want to do on what kind of weather day
+  def weather_search
+    @tracks = TracksHelper::Track.lyrics_keywords(params[:weather], 20).select{ |t| t.match_weather(params[:want_to])}
+
+    respond_to do |format|
+      if @tracks.length > 0
+        format.html {render :show, layout: false}
+      else
+        flash[:danger] = 'There was a problem'
+        format.html { render :index }
+        format.json { }
+      end
+    end
+  end
+
+  #Search by age and sentiment
+def search_with_age
+  @form_feeling = params[:feeling]
+  @tracks = TracksHelper::Track.lyrics_keywords(params[:age], 20).select{ |t| t.match_sentiment(@form_feeling)}
+  respond_to do |format|
+    if @tracks.length > 0
+      format.html {render :show, layout: false}
+    else
+      flash[:danger] = 'There was a problem'
+      format.html { render :index }
+      format.json { }
+    end
+  end
+end
+
+  def search_for_party
+    p "in search_for_party"
+    @tracks = TracksHelper::Track.lyrics_keywords(params[:word], 30).select{|t| (t.audio_features.valence > 0.6)==true && (t.audio_features.danceability > 0.6)==true}
+    respond_to do |format|
+      if @tracks.length > 0
+        format.html {render :show, layout: false}
+      else
+        flash[:danger] = 'There was a problem'
+        format.html { render :index }
+        format.json { }
+      end
+    end
+  end
+
+  def search_for_dance
+    p "in search_for_dance"
+    @tracks = TracksHelper::Track.lyrics_keywords(params[:word], 30).select{|t| (t.audio_features.tempo > 0.6)==true && (t.audio_features.danceability > 0.6)==true}
+    respond_to do |format|
+      if @tracks.length > 0
+        format.html {render :show, layout: false}
+      else
+        flash[:danger] = 'There was a problem'
+        format.html { render :_no_results, layout: false }
+        format.json { }
+      end
+    end
+  end
+
+
 end

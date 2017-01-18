@@ -1,9 +1,9 @@
-<%= form_tag("/search", method: "get", class: "form-search", remote: true) do %>
+<%= form_tag("/search_with_age", method: "get", class: "form-search", remote: true) do %>
 
- <h1>Looking for a song about
-  <%= text_field_tag(:word, "", placeholder:"(topic)") %>
+ <h1>I'm
+  <%= text_field_tag(:age, "", placeholder:"(topic)") %>
 
-  that makes me feel
+  years old and that makes me feel
   <select name="feeling" class="dotted-btn">
     <ul class="dropdown-menu">
     <li><option value="happy">happy</option></li>

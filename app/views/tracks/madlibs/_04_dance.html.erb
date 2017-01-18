@@ -1,0 +1,9 @@
+<%= form_tag("/search_for_dance", method: "get", class: "form-search", remote: true) do %>
+
+ <h1>I want to dance to a song about
+  <%= text_field_tag(:word, "") %>
+
+
+  <%= submit_tag("Search", class:"btn btn-send") %>
+  </h1>
+<% end %>
