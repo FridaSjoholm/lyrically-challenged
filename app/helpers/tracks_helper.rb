@@ -27,9 +27,12 @@ module TracksHelper
       @title = attributes["title"]
       @artist_name = attributes["artist_name"]
       @duration = attributes["duration"]
-      @genre = attributes["main_genre"] || "no genre found"
+      @genre = attributes["main_genre"]
       @track_youtube_id = attributes['track_youtube_id']
 
+      if attributes["main_genre"] == nil
+        @genre = "no genre found"
+      end
 
       @audio_features = RSpotify::AudioFeatures.find(attributes["track_spotify_id"])
       #audio_features include :valence, :danceability, :duration_ms, :energy, :instrumentalness, :liveness, :speechiness, :tempo, :time_signature, :mode
@@ -38,7 +41,7 @@ module TracksHelper
       begin
         @lyrics = get_lyrics(format_for_lyrics_wikia(attributes["title"], attributes["artist_name"]))
       rescue ArgumentError => e
-        @lyrics = nil
+        @lyrics = "Lyrics not found"
       end
 
       #[RSpotify] Get audio_features for track
@@ -115,10 +118,10 @@ module TracksHelper
           if song
             song.body("\n")
           else
-            return "Lyric not found"
+            return "Lyrics not found"
           end
         rescue NoMethodError => e
-          return "Lyric not found"
+          return "Lyrics not found"
         end
       end
 

@@ -8,13 +8,11 @@
 <%@tracks.each do |track|%>
     <div class="col-md-4 col-sm-6 st-service">
       <h3 class="track-title"><%= track.title %></h3>
-      <div title="genre: <%= track.genre  %>
+      <div title="tempo: <%= track.audio_features.tempo  %>
       valence: <%= track.audio_features.valence %>   ">
         Details
       </div>
       <h2><%= track.artist_name %> <br></h2>
-      <h2>Valence: <%= track.audio_features.valence %> <br></h2>
-      <h2>Genre: <%= track.audio_features.genre %></h2><br>
       <% @spotify_id = track.track_spotify_id %>
       <iframe src="https://embed.spotify.com/?uri=spotify:track:<%= @spotify_id %>" width="300" height="380" frameborder="0" allowtransparency="true"></iframe><br />
       <p class="song-result"><%= track.lyrics %></p>
