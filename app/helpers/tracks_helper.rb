@@ -27,7 +27,7 @@ module TracksHelper
       @title = attributes["title"]
       @artist_name = attributes["artist_name"]
       @duration = attributes["duration"]
-      @genre = attributes["main_genre"]
+      @genre = attributes["main_genre"] || "no genre found"
       @track_youtube_id = attributes['track_youtube_id']
 
 

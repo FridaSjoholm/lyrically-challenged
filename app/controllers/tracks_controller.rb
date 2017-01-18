@@ -31,7 +31,7 @@ class TracksController < ApplicationController
         format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
       else
         flash[:danger] = 'There was a problem'
-        format.html { render :index }
+        format.html { render :_no_results, layout: false }
         format.json { }
       end
     end
@@ -44,7 +44,7 @@ class TracksController < ApplicationController
     # Get the environment configured authorization
     scopes =  ['https://www.googleapis.com/auth/cloud-platform',
                'https://www.googleapis.com/auth/compute']
-    authorization = Google::Auth.get_application_default(scopes) 
+    authorization = Google::Auth.get_application_default(scopes)
 
     # Add the the access token obtained using the authorization to a hash, e.g
     # headers.
@@ -93,7 +93,7 @@ class TracksController < ApplicationController
         format.html {render :feelings, layout: false}
       else
         flash[:danger] = 'There was a problem'
-        format.html { render :index }
+        format.html { render :_no_results, layout: false }
         format.json { }
       end
     end
@@ -109,7 +109,7 @@ class TracksController < ApplicationController
         format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
       else
         flash[:danger] = 'There was a problem'
-        format.html { render :index }
+        format.html { render :_no_results, layout: false }
         format.json { }
       end
     end
@@ -125,7 +125,7 @@ def search_with_age
       format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
     else
       flash[:danger] = 'There was a problem'
-      format.html { render :index }
+      format.html { render :_no_results, layout: false }
       format.json { }
     end
   end
@@ -140,7 +140,7 @@ end
         format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
       else
         flash[:danger] = 'There was a problem'
-        format.html { render :index }
+        format.html { render :_no_results, layout: false }
         format.json { }
       end
     end
