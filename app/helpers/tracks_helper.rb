@@ -76,7 +76,6 @@ module TracksHelper
         end
       end
 
-
       def format_for_lyrics_wikia(title, artist_name)
         title = ActiveSupport::Inflector.transliterate(title)
         title_arr = title.split(" ")
