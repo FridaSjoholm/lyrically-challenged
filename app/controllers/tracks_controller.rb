@@ -1,5 +1,4 @@
 class TracksController < ApplicationController
-
   include TracksHelper
 
   def index
@@ -36,6 +35,22 @@ class TracksController < ApplicationController
       end
     end
   end
+
+
+  #Search by age and sentiment
+def search_with_age
+  @form_feeling = params[:feeling]
+  @tracks = TracksHelper::Track.lyrics_keywords(params[:age], 20).select{ |t| t.match_sentiment(@form_feeling)}
+  respond_to do |format|
+    if @tracks.length > 0
+      format.html {render :show, layout: false}
+    else
+      flash[:danger] = 'There was a problem'
+      format.html { render :index }
+      format.json { }
+    end
+  end
+end
 
   def search_for_party
     p "in search_for_party"
