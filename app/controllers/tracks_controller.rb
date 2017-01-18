@@ -51,5 +51,19 @@ class TracksController < ApplicationController
     end
   end
 
+  def search_for_dance
+    p "in search_for_dance"
+    @tracks = TracksHelper::Track.lyrics_keywords(params[:word], 30).select{|t| (t.audio_features.tempo > 0.6)==true && (t.audio_features.danceability > 0.6)==true}
+    respond_to do |format|
+      if @tracks.length > 0
+        format.html {render :show, layout: false}
+      else
+        flash[:danger] = 'There was a problem'
+        format.html { render :_no_results, layout: false }
+        format.json { }
+      end
+    end
+  end
+
 
 end
