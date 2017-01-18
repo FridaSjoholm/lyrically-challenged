@@ -23,3 +23,6 @@
 
 #Ignore Google Cloud API key's file
 lyricallychallenged-e7c2ba0fddf6.json
+
+#Ignore Google cloud sdk Folder
+/documents/google-cloud-sdk*
