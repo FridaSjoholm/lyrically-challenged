@@ -37,7 +37,6 @@ module TracksHelper
       #[RSpotify] Get audio_features for track
         #audio_features include :valence, :danceability, :duration_ms, :energy, :instrumentalness, :liveness, :speechiness, :tempo, :time_signature, :mode
       @audio_features = RSpotify::AudioFeatures.find(attributes["track_spotify_id"])
-      p @audio_features
     end
 
     #Find tracks by a given keyword, initialize new tracks with attrs

@@ -40,6 +40,7 @@ class TracksController < ApplicationController
   #Search by what you want to do on what kind of weather day
   def weather_search
     @tracks = TracksHelper::Track.lyrics_keywords(params[:weather], 20).select{ |t| t.match_weather(params[:want_to])}
+
     respond_to do |format|
       if @tracks.length > 0
         format.html {render :show, layout: false}
