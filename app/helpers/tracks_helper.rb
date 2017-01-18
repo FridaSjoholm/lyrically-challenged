@@ -33,7 +33,6 @@ module TracksHelper
 
       @audio_features = RSpotify::AudioFeatures.find(attributes["track_spotify_id"])
       #audio_features include :valence, :danceability, :duration_ms, :energy, :instrumentalness, :liveness, :speechiness, :tempo, :time_signature, :mode
-    end
 
       #[Lyricfy] Get lyrics, set to nil if error
       begin
@@ -84,7 +83,7 @@ module TracksHelper
           p "You want to be happy"
           audio_features.valence > 0.6
         end
-      end
+    end
 
       def format_for_lyrics_wikia(title, artist_name)
         title = ActiveSupport::Inflector.transliterate(title)
