@@ -14,17 +14,17 @@ class DemosController < ApplicationController
 
     require "google/cloud/language"
 
-    # language = Google::Cloud::Language.new
+    language = Google::Cloud::Language.new
 
-    # content = "Star Wars is a great movie. The Death Star is fearsome."
-    # document = language.document content
-    # annotation = document.annotate
-    #
-    # p annotation.entities.count #=> 3
-    # p annotation.sentiment.score #=> 0.10000000149011612
-    # p annotation.sentiment.magnitude #=> 1.100000023841858
-    # p annotation.sentences.count #=> 2
-    # p annotation.tokens.count #=> 13
+    content = "kewl"
+    document = language.document content
+    annotation = document.annotate
+
+    p annotation.entities.count #=> 3
+    p annotation.sentiment.score #=> 0.10000000149011612
+    p annotation.sentiment.magnitude #=> 1.100000023841858
+    p annotation.sentences.count #=> 2
+    p annotation.tokens.count #=> 13
 
     # #Sample call to Spotify
     #
