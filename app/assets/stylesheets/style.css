@@ -1131,3 +1131,8 @@ form h1 {
 	color: #4D4571;
 	border-bottom: dotted 3px #4D4571;
 }
+
+.see-more {
+	text-align: center;
+	margin: 0 auto;
+}
