@@ -36,7 +36,6 @@ class TracksController < ApplicationController
     end
   end
 
-<<<<<<< HEAD
   #Search by what you want to do on what kind of weather day
   def weather_search
     @tracks = TracksHelper::Track.lyrics_keywords(params[:weather], 20).select{ |t| t.match_weather(params[:want_to])}
@@ -51,7 +50,6 @@ class TracksController < ApplicationController
       end
     end
   end
-=======
 
   #Search by age and sentiment
 def search_with_age
@@ -67,7 +65,6 @@ def search_with_age
     end
   end
 end
->>>>>>> 065abc01b688e6d0b3e0de79aa5e1521f66923f1
 
   def search_for_party
     p "in search_for_party"
