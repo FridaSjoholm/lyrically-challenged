@@ -1,0 +1,18 @@
+<div class="col-md-12">
+  <div class="section-title">
+    <h1>Results</h1>
+    <span class="st-border"></span>
+  </div>
+</div>
+
+<%@songs.each do |track|%>
+    <div class="col-md-4 col-sm-6 st-service">
+      <h3 class="track-title"><%= track.title %></h3>
+      <h2><%= track.artist_name %> <br></h2>
+      <h2>Valence: <%= track.audio_features.valence %> <br></h2>
+      <h2>Energy: <%= track.audio_features.energy %></h2><br>
+      <% @spotify_id = track.track_spotify_id %>
+      <iframe src="https://embed.spotify.com/?uri=spotify:track:<%= @spotify_id %>" width="300" height="380" frameborder="0" allowtransparency="true"></iframe><br />
+      <p class="song-result"><%= track.lyrics %></p>
+    </div>
+<%end%>
