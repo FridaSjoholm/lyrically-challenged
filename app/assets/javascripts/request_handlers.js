@@ -30,7 +30,11 @@ $(function() {
     $('.f-pending-message').show();
   });
 
+// trying jquery ui
+  $(document).tooltip();
+
 });
+
 
 
 // to show dropdown selection for madlib forms in the carousel

@@ -26,3 +26,4 @@
 //= require scripts
 //= require smoothscroll
 //= require waypoints.min
+//= require jquery-ui

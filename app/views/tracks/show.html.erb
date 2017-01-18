@@ -8,6 +8,9 @@
 <%@tracks.each do |track|%>
     <div class="col-md-4 col-sm-6 st-service">
       <h3 class="track-title"><%= track.title %></h3>
+      <div title="hi">
+        hi
+      </div>
       <h2><%= track.artist_name %> <br></h2>
       <h2>Valence: <%= track.audio_features.valence %> <br></h2>
       <h2>Energy: <%= track.audio_features.energy %></h2><br>

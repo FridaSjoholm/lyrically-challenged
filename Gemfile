@@ -23,6 +23,8 @@ gem 'sentimental'
 gem 'lyricfy'
 gem 'google-cloud-language'
 gem 'googleauth'
+#trying for popover
+gem 'jquery-ui-rails'
 
 
 
