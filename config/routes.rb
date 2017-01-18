@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :tracks, only: [:index, :search, :show]
   get "/search", to: "tracks#search"
   get "/search_with_sentiment", to: "tracks#search_with_sentiment"
+  get "/weather_search", to: "tracks#weather_search"
+
 
   resources :demos, only: [:index, :searchstuff, :show]
   get '/searchstuff', to: 'demos#search'

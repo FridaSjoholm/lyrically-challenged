@@ -37,12 +37,13 @@ module TracksHelper
       #[RSpotify] Get audio_features for track
         #audio_features include :valence, :danceability, :duration_ms, :energy, :instrumentalness, :liveness, :speechiness, :tempo, :time_signature, :mode
       @audio_features = RSpotify::AudioFeatures.find(attributes["track_spotify_id"])
+      p @audio_features
     end
 
     #Find tracks by a given keyword, initialize new tracks with attrs
     def self.lyrics_keywords(params, limit=12) #TD: RENAME - self.get_tracks_by_keyword
       p "LIMIT IS"
-      p limit 
+      p limit
       sanitized_string = params.gsub("'","")
       if params.is_a? String
         response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&limit=#{limit}&lyrics_keywords=#{sanitized_string}")
@@ -107,6 +108,21 @@ module TracksHelper
           return "Lyric not found"
         end
       end
+
+      #For 02_sentiment madlib
+      #Filter by matching given feeling
+      def match_weather(want_to)
+        if want_to == "dance"
+          audio_features.valence > 0.5 && audio_features.danceability > 0.5
+        elsif want_to == "chill"
+          audio_features.valence > 0.5 && audio_features.danceability < 0.5
+        elsif want_to == "sulk"
+          audio_features.valence < 0.5 && audio_features.energy < 0.6
+        elsif want_to == "rage"
+          audio_features.valence < 0.5 && audio_features.energy > 0.5
+        end
+      end
+
 
   end#for Class
 end#for Module
