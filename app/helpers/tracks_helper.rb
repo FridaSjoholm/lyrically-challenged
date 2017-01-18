@@ -46,10 +46,13 @@ module TracksHelper
       sanitized_string = params.gsub("'","")
       if params.is_a? String
         response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&limit=#{limit}&lyrics_keywords=#{sanitized_string}")
+        p "response" * 80
+        p response
       end
       tracks = JSON.parse(response.body)["data"]
       clean_tracks = clean_and_prepare_track_data(tracks)
-      clean_tracks.map { |attributes| new(attributes) }
+      # byebug
+      clean_tracks.map { |attributes| p Track.new(attributes) }
     end
 
     #Only display tracks that have valid spotify id's
@@ -92,10 +95,15 @@ module TracksHelper
 
       #[Lyricfy] Lyricfy gets lyrics from LyricsWikia or MetroMix
       def get_lyrics(args)
-        fetcher = Lyricfy::Fetcher.new
-        x = args[:artist_name]
-        y = args[:title]
-        song = fetcher.search(x, y)
+        begin
+          fetcher = Lyricfy::Fetcher.new
+          p x = args[:artist_name]
+          p y = args[:title]
+          p  song = fetcher.search(x, y) if fetcher
+        rescue NoMethodError => e
+          return "Lyric not found"
+        end
+
         begin
           if song
             song.body("\n")
