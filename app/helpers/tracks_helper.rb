@@ -115,5 +115,20 @@ module TracksHelper
         end
       end
 
+      #For 02_sentiment madlib
+      #Filter by matching given feeling
+      def match_weather(want_to)
+        if want_to == "dance"
+          audio_features.valence > 0.5 && audio_features.danceability > 0.5
+        elsif want_to == "chill"
+          audio_features.valence > 0.5 && audio_features.danceability < 0.5
+        elsif want_to == "sulk"
+          audio_features.valence < 0.5 && audio_features.energy < 0.6
+        elsif want_to == "rage"
+          audio_features.valence < 0.5 && audio_features.energy > 0.5
+        end
+      end
+
+
   end#for Class
 end#for Module

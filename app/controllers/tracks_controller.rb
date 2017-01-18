@@ -36,6 +36,20 @@ class TracksController < ApplicationController
     end
   end
 
+  #Search by what you want to do on what kind of weather day
+  def weather_search
+    @tracks = TracksHelper::Track.lyrics_keywords(params[:weather], 20).select{ |t| t.match_weather(params[:want_to])}
+
+    respond_to do |format|
+      if @tracks.length > 0
+        format.html {render :show, layout: false}
+      else
+        flash[:danger] = 'There was a problem'
+        format.html { render :index }
+        format.json { }
+      end
+    end
+  end
 
   #Search by age and sentiment
 def search_with_age
