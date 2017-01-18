@@ -168,7 +168,7 @@ end
   def search_with_genre
 
     p "in search_with_genre"
-    @tracks = TracksHelper::Track.lyrics_keywords(params[:word], 12, params[:genre])
+    @tracks = TracksHelper::Track.lyrics_keywords(params[:word], 20, params[:genre])
       respond_to do |format|
         if @tracks.length > 0
           format.html {render :show, layout: false}
