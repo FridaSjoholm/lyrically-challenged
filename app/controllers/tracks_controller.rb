@@ -12,10 +12,10 @@ class TracksController < ApplicationController
     respond_to do |format|
       if @tracks.length > 0
         format.html {render :show, layout: false}
+        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
       else
         flash[:danger] = 'There was a problem'
         format.html { render :_no_results, layout: false }
-        format.json { }
       end
     end
   end
@@ -28,6 +28,7 @@ class TracksController < ApplicationController
     respond_to do |format|
       if @tracks.length > 0
         format.html {render :show, layout: false}
+        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
       else
         flash[:danger] = 'There was a problem'
         format.html { render :index }
@@ -43,6 +44,7 @@ class TracksController < ApplicationController
     respond_to do |format|
       if @tracks.length > 0
         format.html {render :show, layout: false}
+        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
       else
         flash[:danger] = 'There was a problem'
         format.html { render :index }
@@ -58,6 +60,7 @@ def search_with_age
   respond_to do |format|
     if @tracks.length > 0
       format.html {render :show, layout: false}
+      format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
     else
       flash[:danger] = 'There was a problem'
       format.html { render :index }
@@ -72,6 +75,7 @@ end
     respond_to do |format|
       if @tracks.length > 0
         format.html {render :show, layout: false}
+        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
       else
         flash[:danger] = 'There was a problem'
         format.html { render :index }
@@ -86,6 +90,7 @@ end
     respond_to do |format|
       if @tracks.length > 0
         format.html {render :show, layout: false}
+        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
       else
         flash[:danger] = 'There was a problem'
         format.html { render :_no_results, layout: false }
