@@ -2,8 +2,6 @@ class TracksController < ApplicationController
   include TracksHelper
 
   def index
-    #Instead of an array of hashes, maybe there should be a madlib object?
-    @questions = [["I want a song that makes me feel ", @sentiments, "emotion"], ["about", @names, "name"]]
   end
 
 #Search just by keyword(s)

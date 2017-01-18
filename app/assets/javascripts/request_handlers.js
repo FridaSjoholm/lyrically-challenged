@@ -31,9 +31,17 @@ $(function() {
   });
 
 // trying jquery ui
-  $(document).tooltip();
+  $(document).tooltip({
+    tooltipClass: "pop-it"
+    })
 
 });
+
+// $('.selector').tooltip({
+//         tooltipClass: "tooltip",
+// });
+// });
+
 
 
 
