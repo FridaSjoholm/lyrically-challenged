@@ -33,7 +33,15 @@ $(function() {
 // trying jquery ui
   $(document).tooltip({
     tooltipClass: "pop-it"
+    // position: { my: "left+15 center", at: "right center"}
     })
+
+
+
+//   $( ".selector" ).tooltip({
+//       console.log("I'm here!!!!!!!")
+//   position: { my: "left+15 center", at: "right center" }
+// });
 
 });
 
