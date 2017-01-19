@@ -1150,3 +1150,11 @@ form h1 {
 #simple-search{
 	background: url("headphones.jpg");
 }
+
+#party-search{
+	background: url("dance_party.jpg");
+}
+
+#dance-search{
+	background: url("dance_jump.jpg");
+}
