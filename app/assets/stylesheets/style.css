@@ -1152,32 +1152,31 @@ form h1 {
 }
 
 #party-search{
-	background: url("/assets/images/dance_party.jpg");
+	background-image:url("https://github.com/FridaSjoholm/lyrically-challenged/blob/development/app/assets/images/dance_party.jpg?raw=true");
 }
 
 #dance-search{
-	background-image: image-url("dance_jump.jpg");
+		background-image:url("https://github.com/FridaSjoholm/lyrically-challenged/blob/development/app/assets/images/dance_jump.jpg?raw=true");
 }
 
 #weather-search{
-	background: url("assets/images/weather.jpg");
-
+	background-image:url("https://github.com/FridaSjoholm/lyrically-challenged/blob/development/app/assets/images/weather.jpg?raw=true");
 }
 
 #sentiment-search{
-	background: url("assets/penguin-love.jpg");
+	background-image:url("https://github.com/FridaSjoholm/lyrically-challenged/blob/development/app/assets/images/penguin-love.jpg?raw=true");
 }
 
 #feelings-search{
-	background-image: url("assets/images/sunrise.jpg");
+	background-image:url("https://github.com/FridaSjoholm/lyrically-challenged/blob/development/app/assets/images/sunrise.jpg?raw=true");
 }
 
 #age-search{
-	background: url("/images/birthday.jpg");
+	background-image:url("https://github.com/FridaSjoholm/lyrically-challenged/blob/development/app/assets/images/birthday.jpg?raw=true");
 }
 
 #genre-search{
-	background: url("images/genre.jpg");
+		background-image:url("https://github.com/FridaSjoholm/lyrically-challenged/blob/development/app/assets/images/genre.jpg?raw=true");
 }
 
 .active .orange{
