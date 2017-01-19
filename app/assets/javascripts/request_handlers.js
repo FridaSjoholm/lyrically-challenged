@@ -51,7 +51,7 @@ $(document).on("turbolinks:load", function() {
       value: value,
       range: "min",
       animate: true,
-      orientation: "vertical"
+      orientation: "horizontal"
     });
   });
 
