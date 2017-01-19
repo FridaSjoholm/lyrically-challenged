@@ -1180,6 +1180,20 @@ form h1 {
 	background: url("genre.jpg");
 }
 
+.active .orange{
+	color: #FFA037 !important;
+}
+
+.portfolio-wrapper ul.filter li a:hover, .portfolio-wrapper ul.filter li a.active{
+	color: #FFA037 !important;
+}
+
+li a.active {
+		color: #FFA037 !important;
+}
+
+
+
 
 
 
