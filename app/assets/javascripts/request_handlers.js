@@ -1,4 +1,4 @@
-$(function() {
+$(document).on("turbolinks:load", function() {
 
 //when ajax call made, but data not yet sent back
   //show the loading... message, hide the old results from the last query
@@ -30,25 +30,23 @@ $(function() {
     $('.f-pending-message').show();
   });
 
-// trying jquery ui
+
+//For popover when hover over Details
   $(document).tooltip({
     tooltipClass: "pop-it"
-    // position: { my: "left+15 center", at: "right center"}
     })
 
+//For pagination 
+  $("#show-area").on("ajax:success", ".see-more a", function(e, data, status, xhr) {
+    $(".see-more").hide()
+    $("#show-area").append(data);
 
+  });
 
-//   $( ".selector" ).tooltip({
-//       console.log("I'm here!!!!!!!")
-//   position: { my: "left+15 center", at: "right center" }
-// });
 
 });
 
-// $('.selector').tooltip({
-//         tooltipClass: "tooltip",
-// });
-// });
+
 
 
 
