@@ -86,7 +86,7 @@ module TracksHelper
     end
 
     #Helper method for tracking your feelings in a day form
-    def feelings_day(feelings)
+    def feelings_day(feelings, day)
       # require 'googleauth'
       # # Get the environment configured authorization
       # scopes =  ['https://www.googleapis.com/auth/cloud-platform',
