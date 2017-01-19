@@ -64,13 +64,12 @@ module TracksHelper
 
       if params.is_a? String
         response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&limit=#{limit}&lyrics_keywords=#{sanitized_string}" + "#{genre_url}" + "#{offset_url}")
-        p response
 
       end
       tracks = JSON.parse(response.body)["data"]
       clean_tracks = clean_and_prepare_track_data(tracks)
       # byebug
-      clean_tracks.map { |attributes| p Track.new(attributes) }
+      clean_tracks.map { |attributes| Track.new(attributes) }
     end
 
     #Only display tracks that have valid spotify id's
@@ -82,16 +81,12 @@ module TracksHelper
     #Filter by matching given feeling
     def match_sentiment(form_feeling)
         if form_feeling == "sad"
-          p "You want to be sad"
           audio_features.valence < 0.4
         elsif form_feeling == "angry"
-          p "You want to be angry"
           audio_features.valence >= 0.4 && audio_features.valence <= 0.6
         elsif form_feeling == "calm"
-          p "You want to be calm"
           audio_features.valence > 0.4 && audio_features.tempo < 100
         elsif form_feeling == "happy"
-          p "You want to be happy"
           audio_features.valence > 0.6
         end
     end
@@ -156,7 +151,7 @@ module TracksHelper
           fetcher = Lyricfy::Fetcher.new
           p x = args[:artist_name]
           p y = args[:title]
-          p  song = fetcher.search(x, y) if fetcher
+          song = fetcher.search(x, y) if fetcher
         rescue NoMethodError => e
           return "Lyric not found"
         end
