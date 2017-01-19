@@ -181,21 +181,30 @@ module TracksHelper
         end
       end
 
+      #Generate description string
+      # def description_str
+      #   atts = [:popularity, :genre, :audio_features.valence, :audio_features.energy, :audio_features.speechiness, :audio_features.liveness]
+      # end
 
+
+
+      #Generate readable danceability string for track popover
       def danceability_str
         if audio_features.danceability > 0.9
-          "⭐⭐⭐"
+          "Danceability: ⭐⭐⭐"
 
         elsif audio_features.danceability > 0.75
-          "⭐⭐"
+          "Danceability: ⭐⭐"
 
         elsif audio_features.danceability > 0.6
-          "⭐"
+          "Danceability: ⭐"
+
+        else
+          ""
         end
-
-
-
       end
+
+
 
   end#for Class
 end#for Module
