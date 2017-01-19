@@ -10,8 +10,15 @@ class TracksController < ApplicationController
 
 #Search just by keyword(s)
   def search
-    @tracks = TracksHelper::Track.lyrics_keywords(params[:word])
+    cookies[:dance] = false
+    cookies[:party] = false
+    cookies[:weather] = ""
+    cookies[:feeling] = ""
+    cookies[:genre] = ""
     cookies[:search] = params[:word]
+
+    @tracks = TracksHelper::Track.lyrics_keywords(params[:word])
+
 
     respond_to do |format|
       if @tracks.length > 0
@@ -26,8 +33,14 @@ class TracksController < ApplicationController
 
   #Search by keyword and sentiment
   def search_with_sentiment
+    cookies[:dance] = false
+    cookies[:party] = false
+    cookies[:weather] = ""
+    cookies[:genre] = ""
+    cookies[:search] = params[:word]
+    cookies[:feeling] = params[:feeling]
+
     @form_feeling = params[:feeling]
-    p "in search_with_sentiment"
     @tracks = TracksHelper::Track.lyrics_keywords(params[:word], 20).select{ |t| t.match_sentiment(@form_feeling)}
     respond_to do |format|
       if @tracks.length > 0
@@ -43,6 +56,13 @@ class TracksController < ApplicationController
 
   # Search by the type of day you are having
   def feelings_search
+    cookies[:dance] = false
+    cookies[:party] = false
+    cookies[:weather] = ""
+    cookies[:feeling] = ""
+    cookies[:genre] = ""
+    cookies[:search] = params[:feeling]
+
 
     # feelings_day(params[:feeling], params[:day])
     require 'googleauth'
@@ -107,7 +127,14 @@ class TracksController < ApplicationController
 
   #Search by what you want to do on what kind of weather day
   def weather_search
-    @tracks = TracksHelper::Track.lyrics_keywords(params[:weather], 20).select{ |t| t.match_weather(params[:want_to])}
+    cookies[:dance] = false
+    cookies[:party] = false
+    cookies[:feeling] = ""
+    cookies[:genre] = ""
+    cookies[:weather] = params[:want_to]
+    cookies[:search] = params[:weather]
+
+    @tracks = TracksHelper::Track.lyrics_keywords(params[:weather], 30).select{ |t| t.match_weather(params[:want_to])}
 
     respond_to do |format|
       if @tracks.length > 0
@@ -123,6 +150,13 @@ class TracksController < ApplicationController
 
   #Search by age and sentiment
 def search_with_age
+  cookies[:dance] = false
+  cookies[:party] = false
+  cookies[:weather] = ""
+  cookies[:genre] = ""
+  cookies[:feeling] = params[:feeling]
+  cookies[:search] = params[:age]
+
   @form_feeling = params[:feeling]
   @tracks = TracksHelper::Track.lyrics_keywords(params[:age], 20).select{ |t| t.match_sentiment(@form_feeling)}
   respond_to do |format|
@@ -138,7 +172,13 @@ def search_with_age
 end
 
   def search_for_party
-    p "in search_for_party"
+    cookies[:dance] = false
+    cookies[:weather] = ""
+    cookies[:feeling] = ""
+    cookies[:genre] = ""
+    cookies[:search] = params[:word]
+    cookies[:party] = true
+
     @tracks = TracksHelper::Track.lyrics_keywords(params[:word], 30).select{|t| (t.audio_features.valence > 0.6)==true && (t.audio_features.danceability > 0.6)==true}
     respond_to do |format|
       if @tracks.length > 0
@@ -153,7 +193,13 @@ end
   end
 
   def search_for_dance
-    p "in search_for_dance"
+    cookies[:party] = false
+    cookies[:weather] = ""
+    cookies[:feeling] = ""
+    cookies[:genre] = ""
+    cookies[:search] = params[:word]
+    cookies[:dance] = true
+
     @tracks = TracksHelper::Track.lyrics_keywords(params[:word], 30).select{|t| (t.audio_features.tempo > 0.6)==true && (t.audio_features.danceability > 0.6)==true}
     respond_to do |format|
       if @tracks.length > 0
@@ -168,8 +214,15 @@ end
   end
 
   def search_with_genre
+    cookies[:dance] = false
+    cookies[:party] = false
+    cookies[:weather] = ""
+    cookies[:feeling] = ""
+    cookies[:genre] = params[:genre]
+    cookies[:search] = params[:word]
+    p "In search w genre" + cookies[:genre]
 
-    p "in search_with_genre"
+
     @tracks = TracksHelper::Track.lyrics_keywords(params[:word], 20, params[:genre])
       respond_to do |format|
         if @tracks.length > 0
@@ -184,19 +237,32 @@ end
   end
 
   def see_more
+    p "In see more" + cookies[:genre]
+    if cookies[:weather] != ""
+      @tracks = TracksHelper::Track.lyrics_keywords(cookies[:search], 30, "", 30).select{ |t| t.match_weather(cookies[:weather])}
+    elsif cookies[:genre] != ""
+      @tracks = TracksHelper::Track.lyrics_keywords(cookies[:search], 20, cookies[:genre], 20)
+    elsif cookies[:party]
+      @tracks = TracksHelper::Track.lyrics_keywords(cookies[:search], 30, "", 30).select{|t| (t.audio_features.valence > 0.6)==true && (t.audio_features.danceability > 0.6)==true}
+    elsif cookies[:dance]
+      @tracks = TracksHelper::Track.lyrics_keywords(cookies[:search], 30, "", 30).select{|t| (t.audio_features.tempo > 0.6)==true && (t.audio_features.danceability > 0.6)==true}
+    elsif cookies[:feeling] != ""
+      @tracks = TracksHelper::Track.lyrics_keywords(cookies[:search], 20, "", 20).select{ |t| t.match_sentiment(cookies[:feeling])}
+    else
+      @tracks = TracksHelper::Track.lyrics_keywords(cookies[:search], 20, "", 20)
+    end
 
-    p "in see_more"
-    @tracks = TracksHelper::Track.lyrics_keywords(cookies[:search], 20, "", 20)
-      respond_to do |format|
-        if @tracks.length > 0
-          format.html {render :_more_results, layout: false}
-          format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
-        else
-          flash[:danger] = 'There was a problem'
-          format.html { render :_no_results, layout: false }
-          format.json { }
-        end
+    respond_to do |format|
+      if @tracks.length > 0
+        format.html {render :_more_results, layout: false}
+        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
+      else
+        flash[:danger] = 'There was a problem'
+        format.html { render :_no_results, layout: false }
+        format.json { }
       end
+    end
+
   end
 
   def random_search
