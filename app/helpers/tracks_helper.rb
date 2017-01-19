@@ -96,20 +96,59 @@ module TracksHelper
         end
     end
 
-      def format_for_lyrics_wikia(title, artist_name)
-        title = ActiveSupport::Inflector.transliterate(title)
-        title_arr = title.split(" ")
-        title = title_arr.join("_")
-        title = title.delete("#")
-        title = title.gsub(/_?\[(.*?)\]/, "")
+    #Helper method for tracking your feelings in a day form
+    def feelings_day(feelings, day)
+      # require 'googleauth'
+      # # Get the environment configured authorization
+      # scopes =  ['https://www.googleapis.com/auth/cloud-platform',
+      #            'https://www.googleapis.com/auth/compute']
+      # authorization = Google::Auth.get_application_default(scopes)
+      #
+      # # Add the the access token obtained using the authorization to a hash, e.g
+      # # headers.
+      # some_headers = {}
+      # authorization.apply(some_headers)
+      #
+      # require "google/cloud/language"
+      # language = Google::Cloud::Language.new
+      # content = feelings
+      # document = language.document content
+      # annotation = document.annotate
 
-        artist_name = ActiveSupport::Inflector.transliterate(artist_name)
+      # if annotation.sentiment.score < -(0.4)
+      #    audio_features.valence < convert_google_sentiment_to_spotify_valence(-0.4)
+      # elsif (annotation.sentiment.score < 0 && annotation.sentiment.score > -(0.4))
+      #   p "sad"
+      # elsif (annotation.sentiment.score < 0.5 && annotation.sentiment.score > 0)
+      #   p "Sort of happu"
+      # elsif (annotation.sentiment.score > 0.5 && annotation.sentiment.score <= 1)
+      #   p "HAppy "
+      # else
+      #   p "ooppss"
+      # end
+
+      # return (audio_features.valence < convert_google_sentiment_to_spotify_valence(annotation.sentiment.score) + 0.5) && (audio_features.valence > convert_google_sentiment_to_spotify_valence(annotation.sentiment.score) - 0.5)
+
+    end
+
+    def convert_google_sentiment_to_spotify_valence(gsentiment)
+      return 0.5 + (gsentiment/2)
+    end
+
+    def format_for_lyrics_wikia(title, artist_name)
+      title = ActiveSupport::Inflector.transliterate(title)
+      title_arr = title.split(" ")
+      title = title_arr.join("_")
+      title = title.delete("#")
+      title = title.gsub(/_?\[(.*?)\]/, "")
+
+      artist_name = ActiveSupport::Inflector.transliterate(artist_name)
         artist_arr = artist_name.split(" ")
         artist_arr.map(&:capitalize!)
         artist_name = artist_arr.join("_")
         artist_name = URI.escape(artist_name, /[?#]/)
         return {title:title, artist_name: artist_name}
-      end
+    end
 
       #[Lyricfy] Lyricfy gets lyrics from LyricsWikia or MetroMix
       def get_lyrics(args)

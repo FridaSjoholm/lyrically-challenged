@@ -44,6 +44,7 @@ class TracksController < ApplicationController
   # Search by the type of day you are having
   def feelings_search
 
+    # feelings_day(params[:feeling], params[:day])
     require 'googleauth'
     # Get the environment configured authorization
     scopes =  ['https://www.googleapis.com/auth/cloud-platform',
@@ -66,7 +67,7 @@ class TracksController < ApplicationController
 
 
     respond_to do |format|
-      if @tracks.length > 0
+      if @tracks.length > 0 
         @songs = []
         @tracks.each do |track|
           if track.track_spotify_id != nil
