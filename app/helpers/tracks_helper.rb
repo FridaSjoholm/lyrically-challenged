@@ -156,7 +156,7 @@ module TracksHelper
           fetcher = Lyricfy::Fetcher.new
           p x = args[:artist_name]
           p y = args[:title]
-          p  song = fetcher.search(x, y) if fetcher
+          song = fetcher.search(x, y) if fetcher
         rescue NoMethodError => e
           return "Lyric not found"
         end
