@@ -1148,7 +1148,7 @@ form h1 {
 }
 
 #simple-search{
-	background-image: url("/assets/images/headphones.jpg");
+	background-image:url(image-path("headphones.jpg"));
 }
 
 #party-search{
@@ -1156,7 +1156,7 @@ form h1 {
 }
 
 #dance-search{
-	background-image: url("assets/images/dance_jump.jpg");
+	background-image:url(image-path("dance_jump.jpg"));
 }
 
 #weather-search{
