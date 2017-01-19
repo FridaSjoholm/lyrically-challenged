@@ -1,0 +1,9 @@
+<%= form_tag("/random_search", method: "get", class: "form-search", remote: true) do %>
+
+ <h1>
+  <%= text_area(:text, "", placeholder:"(Rant to me how you are feeling)") %> 
+
+  <%= submit_tag("Search", class:"btn btn-send") %>
+
+  </h1>
+<% end %> <!-- form -->

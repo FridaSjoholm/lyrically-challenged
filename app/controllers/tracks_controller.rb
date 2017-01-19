@@ -67,7 +67,7 @@ class TracksController < ApplicationController
 
 
     respond_to do |format|
-      if @tracks.length > 0 
+      if @tracks.length > 0
         @songs = []
         @tracks.each do |track|
           if track.track_spotify_id != nil
@@ -197,6 +197,10 @@ end
           format.json { }
         end
       end
+  end
+
+  def random_search
+    
   end
 
 end
