@@ -42,9 +42,31 @@ $(document).on("turbolinks:load", function() {
     $("#show-area").append(data);
   });
 
-});
+  // setup graphic EQ
+  $( "#eq > span" ).each(function() {
+    console.log("in slider thing");
+    // read initial values from markup and remove that
+    var value = parseInt( $( this ).text(), 10 );
+    $( this ).empty().slider({
+      value: value,
+      range: "min",
+      animate: true,
+      orientation: "vertical"
+    });
+  });
 
 
+});//end of document on turbolinks load
+
+
+// //for sliders_search
+// $( function() {
+//   $( "#sliderrr" ).slider();
+// } );
+
+
+
+// } );
 
 
 

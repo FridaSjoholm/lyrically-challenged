@@ -1194,11 +1194,7 @@ li a.active {
 
 
 
-
-
-
-
-
-
-
-
+/*vertical sliders*/
+#eq > span {
+	height:120px; float:left; margin:15px
+}
