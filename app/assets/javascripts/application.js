@@ -21,6 +21,7 @@
 //= require jquery.isotope.min
 //= require jquery.magnific-popup.min
 //= require jquery.parallax
+//= require voice_rec
 //= require masonry.pkgd.min
 //= require owl.carousel.min
 //= require scripts

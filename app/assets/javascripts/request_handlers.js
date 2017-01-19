@@ -30,6 +30,8 @@ $(document).on("turbolinks:load", function() {
     $('.f-pending-message').show();
   });
 
+  $('#speech').css("background-color", "grey")
+
 
 //For popover when hover over Details
   $(document).tooltip({

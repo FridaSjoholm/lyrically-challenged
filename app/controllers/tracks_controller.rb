@@ -1,6 +1,7 @@
 class TracksController < ApplicationController
   include TracksHelper
-
+  require 'googleauth'
+  require "google/cloud/language"
   def index
     @genres = ["Alternative/Indie", "Blues", "Cast Recordings/Cabaret", "Christian/Gospel", "Children's",
               "Classical/Opera", "Comedy/Spoken Word", "Country", "Electronica/Dance", "Folk",
@@ -65,7 +66,7 @@ class TracksController < ApplicationController
 
 
     # feelings_day(params[:feeling], params[:day])
-    require 'googleauth'
+    # require 'googleauth'
     # Get the environment configured authorization
     scopes =  ['https://www.googleapis.com/auth/cloud-platform',
                'https://www.googleapis.com/auth/compute']
@@ -79,7 +80,7 @@ class TracksController < ApplicationController
     @day_feeling = params[:day]
     @tracks = TracksHelper::Track.lyrics_keywords(params[:feeling], 20)
 
-    require "google/cloud/language"
+    # require "google/cloud/language"
     language = Google::Cloud::Language.new
     content = @day_feeling
     document = language.document content
@@ -265,4 +266,39 @@ end
 
   end
 
+  def random_search
+    language = Google::Cloud::Language.new
+
+    content = params[:text]
+    p content
+    document = language.document content
+    annotation = document.annotate
+
+    score = annotation.sentiment.score
+    p score
+
+    if score <= -(0.4)
+       word = "depressing"
+    elsif score <= 0 && score >= -(0.4)
+       word = "sad"
+    elsif score <= 0.5 && score >= 0
+       word = "okay"
+    elsif score <= 1 && score >= 0.5
+       word = "happy"
+    end
+
+    p word
+    @tracks = TracksHelper::Track.lyrics_keywords(word, 20)
+
+    respond_to do |format|
+      if @tracks.length > 0
+        format.html {render :show, layout: false}
+        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
+      else
+        flash[:danger] = 'There was a problem'
+        format.html { render :_no_results, layout: false }
+        format.json { }
+      end
+    end
+  end
 end
