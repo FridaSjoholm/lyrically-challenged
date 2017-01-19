@@ -1,5 +1,5 @@
 <%= form_tag("/search_with_genre", method: "get", class: "form-search", remote: true) do %>
-  <h1>Looking for a song about
+  <h1>I'm looking for a song about
   <%= text_field_tag(:word) %></h1><br />
 
   <h4>Filter by genre:
@@ -13,7 +13,6 @@
       </ul>
     </select>
   </h4>
-  <br />
   <%= submit_tag("Search", class:"btn btn-send") %>
 
 <% end %> <!-- form -->

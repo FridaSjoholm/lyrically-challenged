@@ -1,7 +1,8 @@
 <%= form_tag("/search_for_party", method: "get", class: "form-search", remote: true) do %>
 
- <h1>Looking for a song for my
-  <%= text_field_tag(:word, "") %>
+ <h1>I'm looking for a song for my
+  <%= text_field_tag(:word, "", placeholder:"(enter party theme)") %>
+
   themed party
 
   <%= submit_tag("Search", class:"btn btn-send") %>

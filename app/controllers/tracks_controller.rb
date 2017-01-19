@@ -24,7 +24,7 @@ class TracksController < ApplicationController
     respond_to do |format|
       if @tracks.length > 0
         format.html {render :show, layout: false}
-        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
+        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_youtube_id")}}
       else
         flash[:danger] = 'There was a problem'
         format.html { render :_no_results, layout: false }
@@ -46,7 +46,7 @@ class TracksController < ApplicationController
     respond_to do |format|
       if @tracks.length > 0
         format.html {render :show, layout: false}
-        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
+        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_youtube_id")}}
       else
         flash[:danger] = 'There was a problem'
         format.html { render :_no_results, layout: false }
@@ -117,7 +117,7 @@ class TracksController < ApplicationController
 
         end
         format.html {render :feelings, layout: false}
-        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
+        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_youtube_id")}}
       else
         flash[:danger] = 'There was a problem'
         format.html { render :_no_results, layout: false }
@@ -140,7 +140,7 @@ class TracksController < ApplicationController
     respond_to do |format|
       if @tracks.length > 0
         format.html {render :show, layout: false}
-        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
+        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_youtube_id")}}
       else
         flash[:danger] = 'There was a problem'
         format.html { render :_no_results, layout: false }
@@ -163,7 +163,7 @@ def search_with_age
   respond_to do |format|
     if @tracks.length > 0
       format.html {render :show, layout: false}
-      format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
+      format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_youtube_id")}}
     else
       flash[:danger] = 'There was a problem'
       format.html { render :_no_results, layout: false }
@@ -184,7 +184,7 @@ end
     respond_to do |format|
       if @tracks.length > 0
         format.html {render :show, layout: false}
-        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
+        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_youtube_id")}}
       else
         flash[:danger] = 'There was a problem'
         format.html { render :_no_results, layout: false }
@@ -205,7 +205,7 @@ end
     respond_to do |format|
       if @tracks.length > 0
         format.html {render :show, layout: false}
-        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
+        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_youtube_id")}}
       else
         flash[:danger] = 'There was a problem'
         format.html { render :_no_results, layout: false }
@@ -228,7 +228,7 @@ end
       respond_to do |format|
         if @tracks.length > 0
           format.html {render :show, layout: false}
-          format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
+          format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_youtube_id")}}
         else
           flash[:danger] = 'There was a problem'
           format.html { render :_no_results, layout: false }
@@ -256,7 +256,7 @@ end
     respond_to do |format|
       if @tracks.length > 0
         format.html {render :_more_results, layout: false}
-        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
+        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_youtube_id")}}
       else
         flash[:danger] = 'There was a problem'
         format.html { render :_no_results, layout: false }
@@ -267,7 +267,6 @@ end
   end
 
   def random_search
-    byebug
     language = Google::Cloud::Language.new
 
     content = params[:text]
