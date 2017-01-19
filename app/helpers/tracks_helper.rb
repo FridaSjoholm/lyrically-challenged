@@ -47,14 +47,22 @@ module TracksHelper
     end
 
     #Find tracks by a given keyword, initialize new tracks with attrs
-    def self.lyrics_keywords(params, limit=12) #TD: RENAME - self.get_tracks_by_keyword
-      p "LIMIT IS"
-      p limit
+    def self.lyrics_keywords(params, limit=12, genre="", offset="") #TD: RENAME - self.get_tracks_by_keyword
       sanitized_string = params.gsub("'","")
+
+      # if genre, get and sanitize
+      if genre != ""
+        genre_url = "&genre=#{genre}"
+      end
+
+      if offset != ""
+        offset_url = "&offset=#{offset}"
+      end
+
       if params.is_a? String
-        response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&limit=#{limit}&lyrics_keywords=#{sanitized_string}")
-        p "response" * 80
+        response = Faraday.get("#{API_URL}search?api_key=#{ENV['MUSIC_GRAPH_API_KEY']}&limit=#{limit}&lyrics_keywords=#{sanitized_string}" + "#{genre_url}" + "#{offset_url}")
         p response
+
       end
       tracks = JSON.parse(response.body)["data"]
       clean_tracks = clean_and_prepare_track_data(tracks)
@@ -124,20 +132,20 @@ module TracksHelper
       return 0.5 + (gsentiment/2)
     end
 
-      def format_for_lyrics_wikia(title, artist_name)
-        title = ActiveSupport::Inflector.transliterate(title)
-        title_arr = title.split(" ")
-        title = title_arr.join("_")
-        title = title.delete("#")
-        title = title.gsub(/_?\[(.*?)\]/, "")
+    def format_for_lyrics_wikia(title, artist_name)
+      title = ActiveSupport::Inflector.transliterate(title)
+      title_arr = title.split(" ")
+      title = title_arr.join("_")
+      title = title.delete("#")
+      title = title.gsub(/_?\[(.*?)\]/, "")
 
-        artist_name = ActiveSupport::Inflector.transliterate(artist_name)
+      artist_name = ActiveSupport::Inflector.transliterate(artist_name)
         artist_arr = artist_name.split(" ")
         artist_arr.map(&:capitalize!)
         artist_name = artist_arr.join("_")
         artist_name = URI.escape(artist_name, /[?#]/)
         return {title:title, artist_name: artist_name}
-      end
+    end
 
       #[Lyricfy] Lyricfy gets lyrics from LyricsWikia or MetroMix
       def get_lyrics(args)
@@ -174,7 +182,6 @@ module TracksHelper
           audio_features.valence < 0.5 && audio_features.energy > 0.5
         end
       end
-
 
   end#for Class
 end#for Module
