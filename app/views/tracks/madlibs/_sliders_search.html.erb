@@ -1,0 +1,19 @@
+<%= form_tag("/search_with_sliders", method: "get", class: "form-search", remote: true) do %>
+  <h1>Choose your own
+  <%= text_field_tag(:word) %></h1><br />
+
+  <h4>Filter by genre:
+    <select name="genre" class="genre-dropdown">
+
+      <ul class="dropdown-menu">
+        <li><option value="">(All Genres)</option></li>
+        <% @genres.each do |genre| %>
+          <li><option value="<%=genre%>"><%=genre%></option></li>
+        <% end %>
+      </ul>
+    </select>
+  </h4>
+  <br />
+  <%= submit_tag("Search", class:"btn btn-send") %>
+
+<% end %> <!-- form -->

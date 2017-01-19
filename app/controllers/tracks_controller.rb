@@ -265,4 +265,27 @@ end
 
   end
 
+  #Search just by keyword(s)
+    def search_with_sliders
+      cookies[:dance] = false
+      cookies[:party] = false
+      cookies[:weather] = ""
+      cookies[:feeling] = ""
+      cookies[:genre] = ""
+      cookies[:search] = params[:word]
+
+      @tracks = TracksHelper::Track.lyrics_keywords(params[:word])
+
+
+      respond_to do |format|
+        if @tracks.length > 0
+          format.html {render :show, layout: false}
+          format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_youtube_id")}}
+        else
+          flash[:danger] = 'There was a problem'
+          format.html { render :_no_results, layout: false }
+        end
+      end
+    end
+
 end
