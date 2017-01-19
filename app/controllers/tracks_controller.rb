@@ -27,6 +27,8 @@ class TracksController < ApplicationController
   #Search by keyword and sentiment
   def search_with_sentiment
     cookies[:search] = params[:word]
+    cookies[:feeling] = params[:feeling]
+
 
 
     @form_feeling = params[:feeling]
