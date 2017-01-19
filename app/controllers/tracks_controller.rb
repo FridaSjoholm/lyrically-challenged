@@ -255,7 +255,7 @@ end
     respond_to do |format|
       if @tracks.length > 0
         format.html {render :_more_results, layout: false}
-        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
+        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_youtube_id")}}
       else
         flash[:danger] = 'There was a problem'
         format.html { render :_no_results, layout: false }
