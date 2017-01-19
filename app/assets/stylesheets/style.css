@@ -1118,7 +1118,6 @@ form h1 {
     line-height: 50px !important;
 }
 
-<<<<<<< HEAD
 .poppingover{
 	opacity: 100;
 	color: black;
@@ -1127,7 +1126,8 @@ form h1 {
 .pop-it{
 	color: white !important;
 	background-color: black !important;
-=======
+}
+
 .genre-dropdown {
 	background-color: transparent;
 	font-size: 16px;
@@ -1145,5 +1145,4 @@ form h1 {
 .see-more {
 	text-align: center;
 	margin: 0 auto;
->>>>>>> development
 }

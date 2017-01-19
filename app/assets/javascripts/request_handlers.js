@@ -34,15 +34,13 @@ $(document).on("turbolinks:load", function() {
 //For popover when hover over Details
   $(document).tooltip({
     tooltipClass: "pop-it"
-    })
+  });
 
-//For pagination 
+//For pagination
   $("#show-area").on("ajax:success", ".see-more a", function(e, data, status, xhr) {
     $(".see-more").hide()
     $("#show-area").append(data);
-
   });
-
 
 });
 
