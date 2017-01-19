@@ -1148,36 +1148,36 @@ form h1 {
 }
 
 #simple-search{
-	background: url("headphones.jpg");
+	background: url("assets/headphones.jpg");
 }
 
 #party-search{
-	background: url("dance_party.jpg");
+	background: url("assets/dance_party.jpg");
 }
 
 #dance-search{
-	background: url("dance_jump.jpg");
+	background: url("assets/dance_jump.jpg");
 }
 
 #weather-search{
-	background: url("weather.jpg");
+	background: url("assets/weather.jpg");
 
 }
 
 #sentiment-search{
-	background: url("penguin-love.jpg");
+	background: url("assets/penguin-love.jpg");
 }
 
 #feelings-search{
-	background: url("sunrise.jpg");
+	background: url("assets/sunrise.jpg");
 }
 
 #age-search{
-	background: url("birthday.jpg");
+	background: url("assets/birthday.jpg");
 }
 
 #genre-search{
-	background: url("genre.jpg");
+	background: url("assets/genre.jpg");
 }
 
 .active .orange{
@@ -1191,14 +1191,3 @@ form h1 {
 li a.active {
 		color: #FFA037 !important;
 }
-
-
-
-
-
-
-
-
-
-
-
