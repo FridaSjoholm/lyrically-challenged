@@ -1156,7 +1156,7 @@ form h1 {
 }
 
 #dance-search{
-	background-image:url(image-path("dance_jump.jpg"));
+	background-image: image-url("dance_jump.jpg");
 }
 
 #weather-search{
@@ -1169,7 +1169,7 @@ form h1 {
 }
 
 #feelings-search{
-	background-image: url("sunrise.jpg");
+	background-image: url("assets/images/sunrise.jpg");
 }
 
 #age-search{
