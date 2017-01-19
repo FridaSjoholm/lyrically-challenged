@@ -1118,6 +1118,16 @@ form h1 {
     line-height: 50px !important;
 }
 
+.poppingover{
+	opacity: 100;
+	color: black;
+}
+
+.pop-it{
+	color: white !important;
+	background-color: black !important;
+}
+
 .genre-dropdown {
 	background-color: transparent;
 	font-size: 16px;

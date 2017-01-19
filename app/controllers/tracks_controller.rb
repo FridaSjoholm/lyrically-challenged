@@ -6,8 +6,6 @@ class TracksController < ApplicationController
               "Classical/Opera", "Comedy/Spoken Word", "Country", "Electronica/Dance", "Folk",
               "Jazz", "Latin", "New Age", "Pop", "Rap/Hip Hop", "Reggae/Ska", "Rock", "Seasonal", "Soul/R&B",
               "Soundtracks", "Vocals", "World"]
-    #Instead of an array of hashes, maybe there should be a madlib object?
-    @questions = [["I want a song that makes me feel ", @sentiments, "emotion"], ["about", @names, "name"]]
   end
 
 #Search just by keyword(s)
@@ -37,7 +35,7 @@ class TracksController < ApplicationController
         format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
       else
         flash[:danger] = 'There was a problem'
-        format.html { render :index }
+        format.html { render :_no_results, layout: false }
         format.json { }
       end
     end
@@ -100,7 +98,7 @@ class TracksController < ApplicationController
         format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
       else
         flash[:danger] = 'There was a problem'
-        format.html { render :index }
+        format.html { render :_no_results, layout: false }
         format.json { }
       end
     end
@@ -116,7 +114,7 @@ class TracksController < ApplicationController
         format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
       else
         flash[:danger] = 'There was a problem'
-        format.html { render :index }
+        format.html { render :_no_results, layout: false }
         format.json { }
       end
     end
@@ -132,7 +130,7 @@ def search_with_age
       format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
     else
       flash[:danger] = 'There was a problem'
-      format.html { render :index }
+      format.html { render :_no_results, layout: false }
       format.json { }
     end
   end
@@ -147,7 +145,7 @@ end
         format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
       else
         flash[:danger] = 'There was a problem'
-        format.html { render :index }
+        format.html { render :_no_results, layout: false }
         format.json { }
       end
     end

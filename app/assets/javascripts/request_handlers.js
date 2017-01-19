@@ -30,13 +30,23 @@ $(document).on("turbolinks:load", function() {
     $('.f-pending-message').show();
   });
 
+
+//For popover when hover over Details
+  $(document).tooltip({
+    tooltipClass: "pop-it"
+  });
+
+//For pagination
   $("#show-area").on("ajax:success", ".see-more a", function(e, data, status, xhr) {
     $(".see-more").hide()
     $("#show-area").append(data);
-
   });
 
 });
+
+
+
+
 
 
 // to show dropdown selection for madlib forms in the carousel
