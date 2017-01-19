@@ -10,6 +10,7 @@ class TracksController < ApplicationController
 
 #Search just by keyword(s)
   def search
+    cookies[:genre] = ""
     cookies[:feeling] = ""
     cookies[:search] = params[:word]
 
@@ -29,6 +30,7 @@ class TracksController < ApplicationController
 
   #Search by keyword and sentiment
   def search_with_sentiment
+    cookies[:genre] = ""
     cookies[:search] = params[:word]
     cookies[:feeling] = params[:feeling]
 
@@ -48,6 +50,7 @@ class TracksController < ApplicationController
 
   # Search by the type of day you are having
   def feelings_search
+    cookies[:genre] = ""
     cookies[:feeling] = ""
     cookies[:search] = params[:feeling]
 
@@ -115,6 +118,7 @@ class TracksController < ApplicationController
 
   #Search by what you want to do on what kind of weather day
   def weather_search
+    cookies[:genre] = ""
     cookies[:feeling] = ""
     cookies[:search] = params[:weather]
 
@@ -134,7 +138,8 @@ class TracksController < ApplicationController
 
   #Search by age and sentiment
 def search_with_age
-  cookies[:feeling] = ""
+  cookies[:genre] = ""
+  cookies[:feeling] = params[:feeling]
   cookies[:search] = params[:age]
 
   @form_feeling = params[:feeling]
@@ -152,6 +157,7 @@ def search_with_age
 end
 
   def search_for_party
+    cookies[:genre] = ""
     cookies[:feeling] = ""
     cookies[:search] = params[:word]
 
@@ -169,6 +175,7 @@ end
   end
 
   def search_for_dance
+    cookies[:genre] = ""
     cookies[:feeling] = ""
     cookies[:search] = params[:word]
 
@@ -186,8 +193,10 @@ end
   end
 
   def search_with_genre
+    cookies[:genre] = params[:genre]
     cookies[:feeling] = ""
     cookies[:search] = params[:word]
+
 
     @tracks = TracksHelper::Track.lyrics_keywords(params[:word], 20, params[:genre])
       respond_to do |format|
@@ -203,7 +212,9 @@ end
   end
 
   def see_more
-    if cookies[:feeling] != ""
+    if cookies[:genre] != ""
+      @tracks = TracksHelper::Track.lyrics_keywords(cookies[:search], 20, cookies[:genre], 20)
+    elsif cookies[:feeling] != ""
       @tracks = TracksHelper::Track.lyrics_keywords(cookies[:search], 20, "", 20).select{ |t| t.match_sentiment(cookies[:feeling])}
 
     else
