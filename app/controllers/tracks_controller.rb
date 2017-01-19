@@ -267,12 +267,15 @@ end
 
   #Search just by keyword(s)
     def search_with_sliders
+      p "in search_with_sliders" * 100 
       cookies[:dance] = false
       cookies[:party] = false
       cookies[:weather] = ""
       cookies[:feeling] = ""
       cookies[:genre] = ""
       cookies[:search] = params[:word]
+
+      p params
 
       @tracks = TracksHelper::Track.lyrics_keywords(params[:word])
 

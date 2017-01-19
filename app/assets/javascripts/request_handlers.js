@@ -52,9 +52,16 @@ $(document).on("turbolinks:load", function() {
       range: "min",
       animate: true,
       orientation: "horizontal"
+      // slide: function(event, ui){
+      //   console.log(ui.handleIndex);
+      //   console.log(ui.value);
+      //   }
     });
   });
 
+  // //min
+  // var min = $('<label>'+'min'+'</label>').css('left','0'+'%');
+  //  $( "#slider" ).append(min);
 
 });//end of document on turbolinks load
 
