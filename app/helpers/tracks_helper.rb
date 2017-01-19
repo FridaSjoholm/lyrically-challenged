@@ -69,7 +69,7 @@ module TracksHelper
       tracks = JSON.parse(response.body)["data"]
       clean_tracks = clean_and_prepare_track_data(tracks)
       # byebug
-      clean_tracks.map { |attributes| p Track.new(attributes) }
+      clean_tracks.map { |attributes| Track.new(attributes) }
     end
 
     #Only display tracks that have valid spotify id's
