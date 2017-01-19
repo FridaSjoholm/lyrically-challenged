@@ -1,5 +1,5 @@
-var accessToken = "a95a813211b34525b38129bd4540a98f",
-baseUrl = "https://api.api.ai/v1/",
+var accessToken = "<%= ENV['BASETOKEN'] %>"
+var baseUrl = "https://api.api.ai/v1/",
 $speechInput,
 $recBtn,
 recognition,
@@ -73,7 +73,6 @@ function switchRecognition() {
 
 function setInput(text) {
   $speechInput.val(text);
-  console.log(text)
   send();
 }
 
