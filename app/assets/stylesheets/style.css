@@ -1148,7 +1148,7 @@ form h1 {
 }
 
 #simple-search{
-	background-image:url(image-path("headphones.jpg"));
+	background-image:url("https://github.com/FridaSjoholm/lyrically-challenged/blob/development/app/assets/images/headphones.jpg?raw=true");
 }
 
 #party-search{
