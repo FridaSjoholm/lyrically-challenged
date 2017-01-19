@@ -1148,19 +1148,19 @@ form h1 {
 }
 
 #simple-search{
-	background: url("assets/headphones.jpg");
+	background: url("/assets/images/headphones.jpg");
 }
 
 #party-search{
-	background: url("assets/dance_party.jpg");
+	background: url("/assets/images/dance_party.jpg");
 }
 
 #dance-search{
-	background: url("assets/dance_jump.jpg");
+	background: url("assets/images/dance_jump.jpg");
 }
 
 #weather-search{
-	background: url("assets/weather.jpg");
+	background: url("assets/images/weather.jpg");
 
 }
 
@@ -1173,11 +1173,11 @@ form h1 {
 }
 
 #age-search{
-	background: url("assets/birthday.jpg");
+	background: url("/images/birthday.jpg");
 }
 
 #genre-search{
-	background: url("assets/genre.jpg");
+	background: url("images/genre.jpg");
 }
 
 .active .orange{
