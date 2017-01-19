@@ -1117,3 +1117,17 @@ input {
 form h1 {
     line-height: 50px !important;
 }
+
+.genre-dropdown {
+	background-color: transparent;
+	font-size: 16px;
+	font-weight: 200;
+	border-bottom: dotted 3px #C9CCC8;
+	padding: 10px 3px;
+	transition: all 500ms ease-out;
+}
+
+.genre-dropdown:hover {
+	color: #4D4571;
+	border-bottom: dotted 3px #4D4571;
+}

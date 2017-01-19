@@ -13,11 +13,11 @@ Rails.application.routes.draw do
   get "/search_with_age", to: "tracks#search_with_age"
   get "/search_for_party", to: "tracks#search_for_party"
   get "/search_for_dance", to: "tracks#search_for_dance"
+  get "/search_with_genre", to: "tracks#search_with_genre"
+
 
 
   resources :demos, only: [:index, :searchstuff, :show]
   get '/searchstuff', to: 'demos#search'
 
-
-  get "/feelings_search", to: "tracks#feelings_search"
 end
