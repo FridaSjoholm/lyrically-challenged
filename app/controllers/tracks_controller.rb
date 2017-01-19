@@ -200,7 +200,7 @@ end
     cookies[:search] = params[:word]
     cookies[:dance] = true
 
-    @tracks = TracksHelper::Track.lyrics_keywords(params[:word], 30).select{|t| (t.audio_features.tempo > 0.5)==true && (t.audio_features.danceability > 0.5)==true}
+    @tracks = TracksHelper::Track.lyrics_keywords(params[:word], 30).select{|t| (t.audio_features.tempo > 0.6)==true && (t.audio_features.danceability > 0.6)==true}
     respond_to do |format|
       if @tracks.length > 0
         format.html {render :show, layout: false}

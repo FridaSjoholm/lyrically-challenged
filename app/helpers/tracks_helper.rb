@@ -181,5 +181,21 @@ module TracksHelper
         end
       end
 
+
+      def danceability_str
+        if audio_features.danceability > 0.9
+          "⭐⭐⭐"
+
+        elsif audio_features.danceability > 0.75
+          "⭐⭐"
+
+        elsif audio_features.danceability > 0.6
+          "⭐"
+        end
+
+
+
+      end
+
   end#for Class
 end#for Module
