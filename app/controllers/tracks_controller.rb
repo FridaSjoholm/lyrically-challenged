@@ -16,7 +16,7 @@ class TracksController < ApplicationController
     respond_to do |format|
       if @tracks.length > 0
         format.html {render :show, layout: false}
-        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
+        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_youtube_id")}}
       else
         flash[:danger] = 'There was a problem'
         format.html { render :_no_results, layout: false }
@@ -32,7 +32,7 @@ class TracksController < ApplicationController
     respond_to do |format|
       if @tracks.length > 0
         format.html {render :show, layout: false}
-        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
+        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_youtube_id")}}
       else
         flash[:danger] = 'There was a problem'
         format.html { render :_no_results, layout: false }
@@ -67,7 +67,7 @@ class TracksController < ApplicationController
 
 
     respond_to do |format|
-      if @tracks.length > 0 
+      if @tracks.length > 0
         @songs = []
         @tracks.each do |track|
           if track.track_spotify_id != nil
@@ -96,7 +96,7 @@ class TracksController < ApplicationController
 
         end
         format.html {render :feelings, layout: false}
-        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
+        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_youtube_id")}}
       else
         flash[:danger] = 'There was a problem'
         format.html { render :_no_results, layout: false }
@@ -112,7 +112,7 @@ class TracksController < ApplicationController
     respond_to do |format|
       if @tracks.length > 0
         format.html {render :show, layout: false}
-        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
+        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_youtube_id")}}
       else
         flash[:danger] = 'There was a problem'
         format.html { render :_no_results, layout: false }
@@ -128,7 +128,7 @@ def search_with_age
   respond_to do |format|
     if @tracks.length > 0
       format.html {render :show, layout: false}
-      format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
+      format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_youtube_id")}}
     else
       flash[:danger] = 'There was a problem'
       format.html { render :_no_results, layout: false }
@@ -143,7 +143,7 @@ end
     respond_to do |format|
       if @tracks.length > 0
         format.html {render :show, layout: false}
-        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
+        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_youtube_id")}}
       else
         flash[:danger] = 'There was a problem'
         format.html { render :_no_results, layout: false }
@@ -158,7 +158,7 @@ end
     respond_to do |format|
       if @tracks.length > 0
         format.html {render :show, layout: false}
-        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
+        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_youtube_id")}}
       else
         flash[:danger] = 'There was a problem'
         format.html { render :_no_results, layout: false }
@@ -174,7 +174,7 @@ end
       respond_to do |format|
         if @tracks.length > 0
           format.html {render :show, layout: false}
-          format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
+          format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_youtube_id")}}
         else
           flash[:danger] = 'There was a problem'
           format.html { render :_no_results, layout: false }
