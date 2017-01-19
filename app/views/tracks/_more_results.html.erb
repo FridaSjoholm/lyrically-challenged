@@ -1,11 +1,3 @@
-<div class="col-md-12 results-container">
-  <div class="section-title">
-    <h1>Results</h1>
-    <span class="st-border"></span>
-  </div>
-</div>
-
-
 <%@tracks.each do |track|%>
     <div class="col-md-4 col-sm-6 st-service">
       <h3 class="track-title"><%= track.title %></h3>
@@ -19,9 +11,3 @@
       <p class="song-result"><%= track.lyrics %></p>
     </div>
 <%end%>
-<br />
-
-<div class="col-md-12 results-container see-more">
-
-  <h2><%= link_to "See More", "/see_more", remote: true %></h2>
-</div>

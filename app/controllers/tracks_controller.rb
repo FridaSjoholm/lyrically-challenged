@@ -13,6 +13,8 @@ class TracksController < ApplicationController
 #Search just by keyword(s)
   def search
     @tracks = TracksHelper::Track.lyrics_keywords(params[:word])
+    cookies[:search] = params[:word]
+
     respond_to do |format|
       if @tracks.length > 0
         format.html {render :show, layout: false}
@@ -95,6 +97,7 @@ class TracksController < ApplicationController
 
         end
         format.html {render :feelings, layout: false}
+        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
       else
         flash[:danger] = 'There was a problem'
         format.html { render :index }
@@ -168,10 +171,11 @@ end
   def search_with_genre
 
     p "in search_with_genre"
-    @tracks = TracksHelper::Track.lyrics_keywords(params[:word], 12, params[:genre])
+    @tracks = TracksHelper::Track.lyrics_keywords(params[:word], 20, params[:genre])
       respond_to do |format|
         if @tracks.length > 0
           format.html {render :show, layout: false}
+          format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
         else
           flash[:danger] = 'There was a problem'
           format.html { render :_no_results, layout: false }
@@ -180,5 +184,20 @@ end
       end
   end
 
+  def see_more
+
+    p "in see_more"
+    @tracks = TracksHelper::Track.lyrics_keywords(cookies[:search], 20, "", 20)
+      respond_to do |format|
+        if @tracks.length > 0
+          format.html {render :_more_results, layout: false}
+          format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
+        else
+          flash[:danger] = 'There was a problem'
+          format.html { render :_no_results, layout: false }
+          format.json { }
+        end
+      end
+  end
 
 end
