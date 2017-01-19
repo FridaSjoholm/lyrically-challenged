@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get "/search_for_party", to: "tracks#search_for_party"
   get "/search_for_dance", to: "tracks#search_for_dance"
   get "/search_with_genre", to: "tracks#search_with_genre"
+  get '/feelings_search', to: "tracks#feelings_search"
 
   get "/see_more", to: "tracks#see_more"
 
