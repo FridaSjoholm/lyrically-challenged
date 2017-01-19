@@ -1,11 +1,11 @@
 <div class="col-md-12 results-container">
   <div class="section-title">
-    <h1>Results</h1> 
+    <h1>Results</h1>
     <span class="st-border"></span>
   </div>
 </div>
 
-
+<% p @tracks %>
 <%@tracks.each do |track|%>
     <div class="col-md-4 col-sm-6 st-service">
       <h3 class="track-title"><%= track.title %></h3>

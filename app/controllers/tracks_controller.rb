@@ -1,7 +1,7 @@
 class TracksController < ApplicationController
   include TracksHelper
   require 'googleauth'
-
+  require "google/cloud/language"
   def index
     @genres = ["Alternative/Indie", "Blues", "Cast Recordings/Cabaret", "Christian/Gospel", "Children's",
               "Classical/Opera", "Comedy/Spoken Word", "Country", "Electronica/Dance", "Folk",
@@ -66,7 +66,7 @@ class TracksController < ApplicationController
 
 
     # feelings_day(params[:feeling], params[:day])
-    require 'googleauth'
+    # require 'googleauth'
     # Get the environment configured authorization
     scopes =  ['https://www.googleapis.com/auth/cloud-platform',
                'https://www.googleapis.com/auth/compute']
@@ -80,7 +80,7 @@ class TracksController < ApplicationController
     @day_feeling = params[:day]
     @tracks = TracksHelper::Track.lyrics_keywords(params[:feeling], 20)
 
-    require "google/cloud/language"
+    # require "google/cloud/language"
     language = Google::Cloud::Language.new
     content = @day_feeling
     document = language.document content
@@ -267,13 +267,16 @@ end
   end
 
   def random_search
+    byebug
     language = Google::Cloud::Language.new
 
     content = params[:text]
+    p content
     document = language.document content
     annotation = document.annotate
 
     score = annotation.sentiment.score
+    p score
 
     if score <= -(0.4)
        word = "depressing"
@@ -285,6 +288,7 @@ end
        word = "happy"
     end
 
+    p word
     @tracks = TracksHelper::Track.lyrics_keywords(word, 20)
 
     respond_to do |format|
