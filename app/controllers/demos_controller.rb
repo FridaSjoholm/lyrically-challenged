@@ -1,26 +1,27 @@
 class DemosController < ApplicationController
 
   def index
-    # require 'googleauth'
-    # # Get the environment configured authorization
-    # scopes =  ['https://www.googleapis.com/auth/cloud-platform',
-    #            'https://www.googleapis.com/auth/compute']
-    # authorization = Google::Auth.get_application_default(scopes)
-    #
-    # # Add the the access token obtained using the authorization to a hash, e.g
-    # # headers.
-    # some_headers = {}
-    # authorization.apply(some_headers)
-    #
-    # require "google/cloud/language"
-    #
-    # language = Google::Cloud::Language.new
-    #
-    # content = "kewl"
-    # document = language.document content
-    # annotation = document.annotate
-    #
-    # p annotation.entities.count #=> 3
+    require 'googleauth'
+    # Get the environment configured authorization
+    scopes =  ['https://www.googleapis.com/auth/cloud-platform',
+               'https://www.googleapis.com/auth/compute']
+    authorization = Google::Auth.get_application_default(scopes)
+
+    # Add the the access token obtained using the authorization to a hash, e.g
+    # headers.
+    some_headers = {}
+    authorization.apply(some_headers)
+
+    require "google/cloud/language"
+
+    language = Google::Cloud::Language.new
+
+    content = "Shit this sucks ass. Like fuck man I hate it."
+    document = language.document content
+    annotation = document.annotate
+
+    annotation.entities[0].name
+
     # p annotation.sentiment.score #=> 0.10000000149011612
     # p annotation.sentiment.magnitude #=> 1.100000023841858
     # p annotation.sentences.count #=> 2

@@ -1,5 +1,6 @@
 class TracksController < ApplicationController
   include TracksHelper
+  require 'googleauth'
 
   def index
     @genres = ["Alternative/Indie", "Blues", "Cast Recordings/Cabaret", "Christian/Gospel", "Children's",
@@ -266,7 +267,25 @@ end
   end
 
   def random_search
-    
-  end
+    language = Google::Cloud::Language.new
 
+    content = params[:text]
+    document = language.document content
+    annotation = document.annotate
+
+    search = annotation.entities[0].name
+    p search
+    @tracks = TracksHelper::Track.lyrics_keywords(search, 20)
+
+    respond_to do |format|
+      if @tracks.length > 0
+        format.html {render :show, layout: false}
+        format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_spotify_id")}}
+      else
+        flash[:danger] = 'There was a problem'
+        format.html { render :_no_results, layout: false }
+        format.json { }
+      end
+    end
+  end
 end

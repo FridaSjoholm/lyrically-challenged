@@ -13,6 +13,7 @@ $(document).on("turbolinks:load", function() {
     var $display = $('#show-area')
     $('.f-pending-message').hide();
     $display.show();
+    console.log(data)
     $display.html(data);
     $('html, body').animate({
         scrollTop: $("#show-area").offset().top
@@ -29,6 +30,8 @@ $(document).on("turbolinks:load", function() {
     $('#show-songs').hide();
     $('.f-pending-message').show();
   });
+
+  $('textarea#text_').css("background-color", "grey")
 
 
 //For popover when hover over Details
