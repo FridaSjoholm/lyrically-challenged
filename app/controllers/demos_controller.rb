@@ -16,11 +16,11 @@ class DemosController < ApplicationController
 
     language = Google::Cloud::Language.new
 
-    content = "Shit this sucks ass. Like fuck man I hate it."
+    content = "Stupid api doesn't even work"
     document = language.document content
     annotation = document.annotate
 
-    annotation.entities[0].name
+    p annotation.sentences[0]
 
     # p annotation.sentiment.score #=> 0.10000000149011612
     # p annotation.sentiment.magnitude #=> 1.100000023841858

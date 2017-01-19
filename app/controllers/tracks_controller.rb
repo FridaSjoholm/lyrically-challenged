@@ -273,9 +273,19 @@ end
     document = language.document content
     annotation = document.annotate
 
-    search = annotation.entities[0].name
-    p search
-    @tracks = TracksHelper::Track.lyrics_keywords(search, 20)
+    score = annotation.sentiment.score
+
+    if score <= -(0.4)
+       word = "depressing"
+    elsif score <= 0 && score >= -(0.4)
+       word = "sad"
+    elsif score <= 0.5 && score >= 0
+       word = "okay"
+    elsif score <= 1 && score >= 0.5
+       word = "happy"
+    end
+
+    @tracks = TracksHelper::Track.lyrics_keywords(word, 20)
 
     respond_to do |format|
       if @tracks.length > 0
