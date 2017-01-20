@@ -1180,6 +1180,11 @@ form h1 {
 	background: url("genre.jpg");
 }
 
+#random-search{
+	background: url("dog.jpg");
+
+}
+
 .active .orange{
 	color: #FFA037 !important;
 }
