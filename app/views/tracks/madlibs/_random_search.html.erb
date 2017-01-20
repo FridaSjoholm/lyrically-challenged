@@ -1,7 +1,7 @@
 <%= form_tag("/random_feelings_search", method: "get", class: "form-search", remote: true) do %>
 
  <h1>
-  <%= text_area(:text, "", id: "speech", placeholder:"(Rant to me. How you are feeling?)") %>
+  <%= text_area(:text, "", id: "speech", placeholder:"(Rant to me. How are you feeling?)") %>
 
   <%= submit_tag("Search", class:"btn btn-send") %>
 
