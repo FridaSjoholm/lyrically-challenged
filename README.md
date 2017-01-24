@@ -8,7 +8,6 @@ LyricallyChallenged is a lyric-based Rails app and [iOS app](https://github.com/
 
 Recent [research](https://www.cse.unr.edu/~mgunes/papers/ComNet16Lyric.pdf) indicates that lyric-based recommendatation systems are 12.6 times more effective than random recommendations, and may offer better recommendations than collaborative filtering, esepcially "within small musical niches".
 
-
 ##Usage
 * Visit the LyricallyChallenged main page and search for songs by keyword(s)
 ![](https://media.giphy.com/media/y6tNjPEAn7eaA/giphy.gif)
@@ -20,7 +19,7 @@ Recent [research](https://www.cse.unr.edu/~mgunes/papers/ComNet16Lyric.pdf) indi
 The site is available live on [Heroku](http://lyricallychallenged.herokuapp.com/)
 
 ---
-##To clone the repo for localhost:
+#To clone the repo for localhost:
 
 ### 0. Clone the repo
 
@@ -62,6 +61,7 @@ GOOGLE_APPLICATION_CREDENTIALS = "".json
   rails s
 ```
 🎉 🎉 Yay! Your site will probably be live at http://localhost:3000/
+---
 
 ## About Lyrically Challenged
 __See our presentation deck [here](https://docs.google.com/presentation/d/18gs0EuPftq-oOJ0Y8CxVBfq1NHgCIdqfTmrZaZVhhj0/edit#slide=id.g1c13a4db47_0_36)__
