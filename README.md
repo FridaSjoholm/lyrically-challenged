@@ -13,6 +13,7 @@ Recent [research](https://www.cse.unr.edu/~mgunes/papers/ComNet16Lyric.pdf) indi
 * Visit the LyricallyChallenged main page and search for songs by keyword(s)
 ![](https://media.giphy.com/media/y6tNjPEAn7eaA/giphy.gif)
 
+* Each song is displayed with a Spotify widget and full lyrics
 ![](https://media.giphy.com/media/ODhZk2POEhilG/giphy.gif)
 
 ---
@@ -63,7 +64,7 @@ GOOGLE_APPLICATION_CREDENTIALS = "".json
 🎉 🎉 Yay! Your site will probably be live at http://localhost:3000/
 
 ## About Lyrically Challenged
-__See our presentation deck (here)[https://docs.google.com/presentation/d/18gs0EuPftq-oOJ0Y8CxVBfq1NHgCIdqfTmrZaZVhhj0/edit#slide=id.g1c13a4db47_0_36]__
+__See our presentation deck [here](https://docs.google.com/presentation/d/18gs0EuPftq-oOJ0Y8CxVBfq1NHgCIdqfTmrZaZVhhj0/edit#slide=id.g1c13a4db47_0_36)__
 This project was created in our 19th week at Dev Bootcamp, and was built using Rails, HTML/CSS, and Javascript.  We used the Spotify, MusicGraph, api.ai, MetroMix, and Google Natural Language APIs.
 
 ## Contributors
