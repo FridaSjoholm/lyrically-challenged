@@ -3,10 +3,10 @@
 
 ####Search for songs by lyrics.
 
-## Description 
-LyricallyChallenged is a lyric-based Rails app and [iOS app](https://github.com/FridaSjoholm/Lycheee) to search for songs.  Each song can be played via a Spotify widget and is presented with full lyrics and details on why that song was chosen. 
+## Description
+LyricallyChallenged is a lyric-based Rails app and [iOS app](https://github.com/FridaSjoholm/Lycheee) to search for songs.  Each song can be played via a Spotify widget and is presented with full lyrics and details on why that song was chosen.
 
-Recent [research](https://www.cse.unr.edu/~mgunes/papers/ComNet16Lyric.pdf) indicates that lyric-based recommendatation systems are 12.6 times more effective than random recommendations, and may offer better recommendations than collaborative filtering, esepcially "within small musical niches".
+Recent [research](https://www.cse.unr.edu/~mgunes/papers/ComNet16Lyric.pdf) indicates that lyric-based recommendation systems are 12.6 times more effective than random recommendations, and may offer better recommendations than collaborative filtering, especially, "within small musical niches".
 
 ##Usage
 * Visit the LyricallyChallenged main page and search for songs by keyword(s)
@@ -50,17 +50,17 @@ GOOGLE_APPLICATION_CREDENTIALS = "".json
 ```
 * The GOOGLE_APPLICATION_CREDENTIALS will be a path file to a json file in the root of your app.
 
-### 3. Navigate to the project 
--Navigate to the project
--Run bundle to install gems
--Start the rails server
+### 3. Navigate to the project
+- Navigate to the project
+- Run bundle to install gems
+- Start the rails server
 
 ```bash
   cd lyricallychallenged
   bundle
   rails s
 ```
-🎉 🎉 Yay! Your site will probably be live at http://localhost:3000/
+🎉 🎉 Yay! Your site will be live at http://localhost:3000/
 ---
 
 ## About Lyrically Challenged
@@ -69,11 +69,11 @@ This project was created in our 19th week at Dev Bootcamp, and was built using R
 
 ## Contributors
 
-* [Katie O'Neil](https://github.com/katieboundary)
+* [Katie O'Neill](https://github.com/katieboundary)
 * [Katrina DeVaney](https://github.com/kattak)
 * [Jin Di Giordano](https://github.com/jindigiordano)
 * [Christian Salas](https://github.com/SalasC2)
 * [Frida Sjöholm](https://github.com/FridaSjoholm)
 
-If you are interested in improving or adding new awesome features to LyricallyChallenged, please feel free to submit an issue or pull request!
+If you are interested in improving or adding new awesome features to LyricallyChallenged, please feel free to submit an issue or a pull request!
 
