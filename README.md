@@ -3,7 +3,7 @@
 
 ####Search for songs by lyrics.
 
-![Lyrically Challenged Mockup](https://github.com/FridaSjoholm/lyrically-challenged/blob/development/app/assets/images/Lyrically-Challenged-Presentation.jpg?raw=true)
+![Lyrically Challenged Mockup](https://github.com/FridaSjoholm/lyrically-challenged/blob/development/app/assets/images/Lyrically-Challenged-Presentation.jpg)
 
 ## Description
 LyricallyChallenged is a lyric-based Rails app and [iOS app](https://github.com/FridaSjoholm/Lycheee) to search for songs.  Each song can be played via a Spotify widget and is presented with full lyrics and details on why that song was chosen.
