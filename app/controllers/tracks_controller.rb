@@ -116,7 +116,7 @@ class TracksController < ApplicationController
           end
 
         end
-        format.html {render :feelings, layout: false}
+        format.html {render :show, layout: false}
         format.json {render json: @tracks.map{|track| track.as_json.slice("title", "artist_name", "track_youtube_id")}}
       else
         flash[:danger] = 'There was a problem'
