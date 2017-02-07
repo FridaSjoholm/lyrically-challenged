@@ -44,6 +44,13 @@ $(document).on("turbolinks:load", function() {
     $("#show-area").append(data);
   });
 
+  $(".filter li a").on("click", function(){
+    $(".filter li a").removeClass("active orange");
+    var navIndex = $(this).parent("li").index();
+    console.log(navIndex);
+    $(".filter li:nth-child(" + (navIndex + 1) + ") a").addClass("active orange");
+  })
+
 });
 
 
