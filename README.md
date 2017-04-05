@@ -1,7 +1,7 @@
 
 ![Lyrically Challenged](https://github.com/FridaSjoholm/lyrically-challenged/blob/development/app/assets/images/LClogo.png?raw=true)
 
-####Search for songs by lyrics.
+#### Search for songs by lyrics.
 
 ![Lyrically Challenged Mockup](https://github.com/FridaSjoholm/lyrically-challenged/blob/development/app/assets/images/Lyrically-Challenged-Presentation.jpg)
 
@@ -10,7 +10,7 @@ LyricallyChallenged is a lyric-based Rails app and [iOS app](https://github.com/
 
 Recent [research](https://www.cse.unr.edu/~mgunes/papers/ComNet16Lyric.pdf) indicates that lyric-based recommendation systems are 12.6 times more effective than random recommendations, and may offer better recommendations than collaborative filtering, especially, "within small musical niches".
 
-##Usage
+## Usage
 * Visit the LyricallyChallenged main page and search for songs by keyword(s)
 ![](https://media.giphy.com/media/y6tNjPEAn7eaA/giphy.gif)
 
@@ -21,7 +21,7 @@ Recent [research](https://www.cse.unr.edu/~mgunes/papers/ComNet16Lyric.pdf) indi
 The site is available live on [Heroku](http://lyricallychallenged.herokuapp.com/)
 
 ---
-#To clone the repo for localhost:
+# To clone the repo for localhost:
 
 ### 0. Clone the repo
 
@@ -34,7 +34,7 @@ In your terminal, navigate to where you want to place the file:
 
 #### 2. Include dotenv gem in your gem file (look at https://github.com/bkeepers/dotenv for instructions)
 
-####You'll need to get API keys from:
+#### You'll need to get API keys from:
 - [MusicGraph](https://developer.musicgraph.com/)
 - [Spotify](https://developer.spotify.com/web-api/)
 - [api.ai](https://docs.api.ai/)
